@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CodingChallenge, TestResult, UserStats } from '../types';
 import { runCodeAndTest, CodeExecutionReport } from '../utils/codeRunner';
 import { soundFx } from '../utils/sound';
@@ -9,16 +9,14 @@ import {
   Sparkles,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   BookOpen,
   Terminal,
   Code,
   Lightbulb,
-  MessageSquare,
   Bot,
   AlertTriangle,
-  Send,
   Loader2,
+  Eye,
 } from 'lucide-react';
 
 interface CodingLabProps {
@@ -39,9 +37,20 @@ export const CodingLab: React.FC<CodingLabProps> = ({
   const [code, setCode] = useState<string>(challenge.starterCode);
   const [report, setReport] = useState<CodeExecutionReport | null>(null);
   const [activeLeftTab, setActiveLeftTab] = useState<'quest' | 'tests'>('quest');
+  const [activeRightTab, setActiveRightTab] = useState<'editor' | 'preview'>('editor');
   const [isExecuting, setIsExecuting] = useState<boolean>(false);
   const [aiQuickLoading, setAiQuickLoading] = useState<boolean>(false);
   const [aiQuickReply, setAiQuickReply] = useState<string | null>(null);
+
+  const isFrontendTrack = [
+    'html',
+    'css',
+    'tailwindcss',
+    'reactjs',
+    'vuejs',
+    'nuxtjs',
+    'nextjs',
+  ].includes(challenge.language);
 
   // Line numbers calculation
   const lineCount = code.split('\n').length;
@@ -110,6 +119,25 @@ export const CodingLab: React.FC<CodingLabProps> = ({
     }
   };
 
+  // Construct iframe preview srcDoc for HTML/CSS/Tailwind
+  const getPreviewHtml = () => {
+    return `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <script src="https://cdn.tailwindcss.com"></script>
+          <style>
+            body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, sans-serif; padding: 20px; }
+          </style>
+        </head>
+        <body>
+          ${code}
+        </body>
+      </html>
+    `;
+  };
+
   return (
     <div className="min-h-[calc(100vh-65px)] bg-slate-950 text-slate-100 flex flex-col">
       {/* Top Bar Navigation & Controls */}
@@ -129,7 +157,7 @@ export const CodingLab: React.FC<CodingLabProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-bold border border-indigo-500/30">
-                កម្រិត Level {challenge.levelNum}
+                {challenge.language.toUpperCase()} • Level {challenge.levelNum}
               </span>
               <h2 className="text-base font-bold text-white truncate max-w-[200px] sm:max-w-md">
                 {challenge.titleKhmer}
@@ -352,38 +380,73 @@ export const CodingLab: React.FC<CodingLabProps> = ({
           </div>
         </div>
 
-        {/* Right Side: Code Editor & Console Output (7 cols) */}
+        {/* Right Side: Code Editor & Live Preview Output (7 cols) */}
         <div className="lg:col-span-7 flex flex-col h-full bg-slate-950">
-          {/* Editor Header */}
+          {/* Editor Header & Tab Selector */}
           <div className="bg-slate-900/90 px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-            <div className="flex items-center gap-2">
-              <Code className="w-4 h-4 text-amber-400" />
-              <span className="font-bold text-slate-200">solution.js</span>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setActiveRightTab('editor')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition ${
+                  activeRightTab === 'editor'
+                    ? 'bg-slate-800 text-amber-300 border border-slate-700'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Code className="w-3.5 h-3.5 text-amber-400" />
+                <span>កូដ Editor</span>
+              </button>
+
+              {isFrontendTrack && (
+                <button
+                  onClick={() => setActiveRightTab('preview')}
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg font-bold transition ${
+                    activeRightTab === 'preview'
+                      ? 'bg-amber-500 text-slate-950 shadow'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>មើលលទ្ធផលផ្ទាល់ (Live Preview)</span>
+                </button>
+              )}
             </div>
-            <span>JavaScript (ES6)</span>
+
+            <span className="font-semibold text-slate-400">{challenge.language.toUpperCase()} Mode</span>
           </div>
 
           {/* Main Code Editor Input Pane */}
-          <div className="flex-1 relative font-mono text-sm overflow-hidden flex bg-slate-950">
-            {/* Line Numbers Sidebar */}
-            <div className="w-10 select-none bg-slate-900/40 text-slate-600 text-right pr-3 py-3 border-r border-slate-800/60 leading-6 text-xs">
-              {lineNumbers.map((n) => (
-                <div key={n}>{n}</div>
-              ))}
-            </div>
+          {activeRightTab === 'editor' ? (
+            <div className="flex-1 relative font-mono text-sm overflow-hidden flex bg-slate-950">
+              {/* Line Numbers Sidebar */}
+              <div className="w-10 select-none bg-slate-900/40 text-slate-600 text-right pr-3 py-3 border-r border-slate-800/60 leading-6 text-xs">
+                {lineNumbers.map((n) => (
+                  <div key={n}>{n}</div>
+                ))}
+              </div>
 
-            {/* Code Textarea */}
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              spellCheck={false}
-              className="flex-1 bg-transparent text-emerald-300 p-3 outline-none resize-none leading-6 font-mono font-medium focus:ring-0 selection:bg-indigo-600 selection:text-white"
-              placeholder="// សរសេរកូដនៅទីនេះ..."
-            />
-          </div>
+              {/* Code Textarea */}
+              <textarea
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                spellCheck={false}
+                className="flex-1 bg-transparent text-emerald-300 p-3 outline-none resize-none leading-6 font-mono font-medium focus:ring-0 selection:bg-indigo-600 selection:text-white"
+                placeholder="// សរសេរកូដនៅទីនេះ..."
+              />
+            </div>
+          ) : (
+            /* Live Render Preview Pane for HTML/CSS/Tailwind/React */
+            <div className="flex-1 bg-slate-900 p-2 overflow-hidden">
+              <iframe
+                title="Live Output Preview"
+                srcDoc={getPreviewHtml()}
+                className="w-full h-full rounded-2xl bg-slate-950 border border-slate-800"
+              />
+            </div>
+          )}
 
           {/* Console Log Drawer */}
-          <div className="bg-slate-900 border-t border-slate-800 p-3 max-h-36 overflow-y-auto font-mono text-xs text-slate-300 space-y-1">
+          <div className="bg-slate-900 border-t border-slate-800 p-3 max-h-32 overflow-y-auto font-mono text-xs text-slate-300 space-y-1">
             <div className="flex items-center justify-between text-[11px] text-slate-500 font-sans border-b border-slate-800 pb-1 mb-1">
               <span className="flex items-center gap-1 font-bold">
                 <Terminal className="w-3.5 h-3.5 text-amber-400" /> Console Output
@@ -428,7 +491,7 @@ export const CodingLab: React.FC<CodingLabProps> = ({
               <button
                 onClick={() => {
                   soundFx.playClick();
-                  onOpenAiTutor(`សូមជួយពន្យល់ពីរបៀបធ្វើលំហាត់ "${challenge.titleKhmer}" អោយខ្ញុំបន្តិច`);
+                  onOpenAiTutor(`សូមជួយពន្យល់ពីរបៀបធ្វើលំហាត់ "${challenge.titleKhmer}" នៃ ${challenge.language} អោយខ្ញុំបន្តិច`);
                 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-xs font-semibold border border-indigo-500/40 transition active:scale-95 ml-auto"
               >
@@ -441,7 +504,7 @@ export const CodingLab: React.FC<CodingLabProps> = ({
             {aiQuickLoading && (
               <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-amber-300 flex items-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
-                <span>អ្នកគ្រូកូដ AI កំពុងវិភាគកូដរបស់អ្នក...</span>
+                <span>អ្នកគ្រូកូដ AI កំពុងវិភាគកូដ {challenge.language} របស់អ្នក...</span>
               </div>
             )}
 

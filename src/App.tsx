@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { UserStats, CodingChallenge } from './types';
+import { UserStats, CodingChallenge, LanguageTrackId } from './types';
 import { KHMER_CODING_CHALLENGES } from './data/challenges';
 import { soundFx } from './utils/sound';
 import { Navbar } from './components/Navbar';
+import { HomePage } from './components/HomePage';
+import { TracksPage } from './components/TracksPage';
 import { QuestMap } from './components/QuestMap';
 import { CodingLab } from './components/CodingLab';
 import { AiTutorDrawer } from './components/AiTutorDrawer';
@@ -13,7 +15,7 @@ import { LeaderboardModal } from './components/LeaderboardModal';
 import { VictoryModal } from './components/VictoryModal';
 import { CodeExecutionReport } from './utils/codeRunner';
 
-const STORAGE_KEY = 'khmercode_quest_stats_v1';
+const STORAGE_KEY = 'khmercode_quest_stats_v2';
 
 const DEFAULT_STATS: UserStats = {
   level: 1,
@@ -24,7 +26,20 @@ const DEFAULT_STATS: UserStats = {
   maxHearts: 5,
   streakDays: 3,
   completedChallengeIds: [],
-  unlockedChallengeIds: ['quest-1'],
+  unlockedChallengeIds: [
+    'quest-1',
+    'quest-html-1',
+    'quest-css-1',
+    'quest-tw-1',
+    'quest-react-1',
+    'quest-vue-1',
+    'quest-nuxt-1',
+    'quest-next-1',
+    'quest-node-1',
+    'quest-express-1',
+    'quest-nest-1',
+    'quest-laravel-1',
+  ],
   avatar: '🧙‍♂️',
   title: 'អ្នកសរសេរកូដដំបូង',
   soundEnabled: true,
@@ -45,9 +60,10 @@ export default function App() {
     return DEFAULT_STATS;
   });
 
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageTrackId>('javascript');
   const [challenges, setChallenges] = useState<CodingChallenge[]>(KHMER_CODING_CHALLENGES);
   const [activeChallenge, setActiveChallenge] = useState<CodingChallenge | null>(null);
-  const [view, setView] = useState<'map' | 'lab'>('map');
+  const [view, setView] = useState<'home' | 'map' | 'tracks' | 'lab'>('home');
 
   // Modals
   const [isShopOpen, setIsShopOpen] = useState(false);
@@ -123,7 +139,9 @@ export default function App() {
     if (!activeChallenge) return;
 
     const currentLevel = activeChallenge.levelNum;
-    const nextChallenge = challenges.find((c) => c.levelNum === currentLevel + 1);
+    const nextChallenge = challenges.find(
+      (c) => c.language === activeChallenge.language && c.levelNum === currentLevel + 1
+    );
 
     if (nextChallenge) {
       setActiveChallenge(nextChallenge);
@@ -177,24 +195,55 @@ export default function App() {
       {/* Header Bar */}
       <Navbar
         stats={stats}
+        currentView={view}
+        onNavigate={(v) => setView(v)}
         onOpenShop={() => setIsShopOpen(true)}
         onOpenAchievements={() => setIsAchievementsOpen(true)}
         onOpenLeaderboard={() => setIsLeaderboardOpen(true)}
         onOpenAiGenerator={() => setIsAiGeneratorOpen(true)}
         onToggleSound={handleToggleSound}
-        onGoHome={() => setView('map')}
       />
 
-      {/* Main View Router */}
+      {/* Main Multi-Page Router */}
       <main>
-        {view === 'map' || !activeChallenge ? (
+        {view === 'home' && (
+          <HomePage
+            stats={stats}
+            challenges={challenges}
+            onStartQuestMap={(lang) => {
+              if (lang) setSelectedLanguage(lang);
+              setView('map');
+            }}
+            onExploreTracks={() => setView('tracks')}
+            onOpenAiGenerator={() => setIsAiGeneratorOpen(true)}
+            onOpenAiTutor={() => handleOpenAiTutor()}
+          />
+        )}
+
+        {view === 'tracks' && (
+          <TracksPage
+            stats={stats}
+            challenges={challenges}
+            onSelectTrack={(lang) => {
+              setSelectedLanguage(lang);
+              setView('map');
+            }}
+            onOpenAiGenerator={() => setIsAiGeneratorOpen(true)}
+          />
+        )}
+
+        {view === 'map' && (
           <QuestMap
             challenges={challenges}
             stats={stats}
+            selectedLanguage={selectedLanguage}
+            onSelectLanguage={(lang) => setSelectedLanguage(lang)}
             onSelectChallenge={handleSelectChallenge}
             onOpenAiGenerator={() => setIsAiGeneratorOpen(true)}
           />
-        ) : (
+        )}
+
+        {view === 'lab' && activeChallenge && (
           <CodingLab
             challenge={activeChallenge}
             stats={stats}
@@ -217,9 +266,11 @@ export default function App() {
       {/* AI Challenge Generator Modal */}
       <AiChallengeModal
         isOpen={isAiGeneratorOpen}
+        selectedLanguage={selectedLanguage}
         onClose={() => setIsAiGeneratorOpen(false)}
         onStartGeneratedChallenge={(generated) => {
           setChallenges((prev) => [generated, ...prev]);
+          setSelectedLanguage(generated.language);
           setActiveChallenge(generated);
           setView('lab');
         }}

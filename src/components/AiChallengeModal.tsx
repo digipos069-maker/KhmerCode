@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import { CodingChallenge } from '../types';
+import { CodingChallenge, LanguageTrackId } from '../types';
+import { ALL_LANGUAGE_TRACKS } from '../data/challenges';
 import { soundFx } from '../utils/sound';
-import { Sparkles, X, Loader2, Code, ShieldAlert, Check } from 'lucide-react';
+import { Sparkles, X, Loader2 } from 'lucide-react';
 
 interface AiChallengeModalProps {
   isOpen: boolean;
+  selectedLanguage: LanguageTrackId;
   onClose: () => void;
   onStartGeneratedChallenge: (challenge: CodingChallenge) => void;
 }
 
 export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
   isOpen,
+  selectedLanguage,
   onClose,
   onStartGeneratedChallenge,
 }) => {
-  const [topic, setTopic] = useState<string>('JavaScript Basics');
-  const [difficulty, setDifficulty] = useState<string>('Beginner');
+  const [targetLang, setTargetLang] = useState<LanguageTrackId>(selectedLanguage);
+  const [topic, setTopic] = useState<string>('Basics & Logic');
+  const [difficulty, setDifficulty] = useState<string>('Intermediate');
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -30,17 +34,17 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
       const res = await fetch('/api/generate-challenge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic, difficulty }),
+        body: JSON.stringify({ topic, difficulty, language: targetLang }),
       });
 
       const data = await res.json();
       if (data.challenge && data.challenge.title) {
-        // Format to CodingChallenge object
         const generated: CodingChallenge = {
           id: `ai-quest-${Date.now()}`,
+          language: targetLang,
           levelNum: 99,
           titleKhmer: data.challenge.title,
-          titleEn: data.challenge.titleEn || topic,
+          titleEn: data.challenge.titleEn || `${targetLang.toUpperCase()} Quest`,
           category: 'ai_generated',
           difficulty: 'មធ្យម',
           xp: data.challenge.xp || 150,
@@ -48,15 +52,15 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
           storyKhmer: data.challenge.story || 'បេសកកម្ម AI ពិសេសត្រូវបានបង្កើតឡើងសម្រាប់អ្នក!',
           descriptionKhmer: data.challenge.description || 'សរសេរកូដដោះស្រាយលំហាត់',
           theoryKhmer: data.challenge.solutionHint || 'ប្រើប្រាស់ចំណេះដឹងកូដរបស់អ្នកដើម្បីដោះស្រាយ',
-          keyConcepts: [topic.toLowerCase(), 'ai-generated'],
-          starterCode: data.challenge.starterCode || '// សរសេរកូដនៅទីនេះ\nfunction solution() {\n  return "";\n}',
+          keyConcepts: [targetLang, 'ai-generated'],
+          starterCode: data.challenge.starterCode || '// សរសេរកូដនៅទីនេះ',
           solutionHintKhmer: data.challenge.solutionHint || 'ពិនិត្យមើលលក្ខខណ្ឌ',
           solutionCode: data.challenge.starterCode,
-          testCases: data.challenge.testCases.map((tc: any, i: number) => ({
+          testCases: (data.challenge.testCases || []).map((tc: any, i: number) => ({
             id: `tc-ai-${i}`,
             inputDescription: tc.inputDescription || tc.testFnCall,
-            testFnCall: tc.testFnCall,
-            expectedOutput: tc.expectedOutput,
+            testFnCall: tc.testFnCall || `CONTAINS: ${topic}`,
+            expectedOutput: tc.expectedOutput || 'true',
             isSecret: tc.isSecret || false,
           })),
         };
@@ -74,17 +78,9 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
     }
   };
 
-  const POPULAR_TOPICS = [
-    'JavaScript Math',
-    'String Operations',
-    'Array Manipulation',
-    'Object Lookup',
-    'Logical Puzzles',
-  ];
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="w-full max-w-lg bg-slate-900 border border-purple-500/30 rounded-3xl p-6 shadow-2xl relative overflow-hidden space-y-6">
+      <div className="w-full max-w-lg bg-slate-900 border border-purple-500/30 rounded-3xl p-6 shadow-2xl relative overflow-hidden space-y-5">
         <div className="absolute top-0 right-0 p-4">
           <button
             onClick={() => {
@@ -104,12 +100,35 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
           </div>
           <div>
             <h3 className="text-xl font-extrabold text-white">បង្កើតលំហាត់ AI ថ្មី</h3>
-            <p className="text-xs text-slate-400">បង្កើតបេសកកម្មកូដខ្មែរគ្មានដែនកំណត់ដោយប្រើ AI</p>
+            <p className="text-xs text-slate-400">បង្កើតបេសកកម្មកូដខ្មែរគ្រប់ភាសាគ្មានដែនកំណត់</p>
           </div>
         </div>
 
         {/* Inputs */}
         <div className="space-y-4 text-xs">
+          {/* Target Language Grid Selector */}
+          <div>
+            <label className="block text-slate-300 font-bold mb-1.5">
+              ជ្រើសរើសភាសា ឬ Framework:
+            </label>
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-36 overflow-y-auto p-1 bg-slate-950 rounded-xl border border-slate-800">
+              {ALL_LANGUAGE_TRACKS.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTargetLang(t.id)}
+                  className={`p-2 rounded-lg text-left border font-semibold flex items-center gap-1.5 transition ${
+                    targetLang === t.id
+                      ? 'bg-amber-500 text-slate-950 border-amber-400 font-bold'
+                      : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800'
+                  }`}
+                >
+                  <span className="text-sm">{t.icon}</span>
+                  <span className="truncate text-[11px]">{t.nameEn}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div>
             <label className="block text-slate-300 font-bold mb-1.5">
               ប្រធានបទលំហាត់ (Topic):
@@ -118,21 +137,9 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="ឧទាហរណ៍: Arrays, Strings, Loops, Logic"
+              placeholder="ឧទាហរណ៍: Buttons, Routing, Controller, Database"
               className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white outline-none focus:border-purple-500"
             />
-            {/* Quick Chips */}
-            <div className="flex flex-wrap gap-1.5 mt-2">
-              {POPULAR_TOPICS.map((top, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setTopic(top)}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700"
-                >
-                  {top}
-                </button>
-              ))}
-            </div>
           </div>
 
           <div>
@@ -140,7 +147,7 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
               កម្រិតលំបាក (Difficulty):
             </label>
             <div className="grid grid-cols-3 gap-2">
-              {['Beginner (ងាយ)', 'Intermediate (មធ្យម)', 'Advanced (ពិបាក)'].map((diff) => (
+              {['Beginner', 'Intermediate', 'Advanced'].map((diff) => (
                 <button
                   key={diff}
                   onClick={() => setDifficulty(diff)}
@@ -150,7 +157,7 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
                       : 'bg-slate-950 text-slate-400 border-slate-800'
                   }`}
                 >
-                  {diff.split(' ')[0]}
+                  {diff}
                 </button>
               ))}
             </div>
@@ -172,7 +179,7 @@ export const AiChallengeModal: React.FC<AiChallengeModalProps> = ({
           {loading ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin text-amber-300" />
-              <span>AI កំពុងបង្កើតលំហាត់កូដខ្មែរ...</span>
+              <span>AI កំពុងបង្កើតលំហាត់ {targetLang.toUpperCase()}...</span>
             </>
           ) : (
             <>

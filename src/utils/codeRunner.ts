@@ -15,21 +15,7 @@ export function runCodeAndTest(userCode: string, testCases: TestCase[]): CodeExe
   const logs: string[] = [];
   const testResults: TestResult[] = [];
 
-  // Override console.log during test execution to capture outputs
-  const originalLog = console.log;
-  const capturedLogs: string[] = [];
-
-  const safeLog = (...args: any[]) => {
-    const formatted = args
-      .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg)))
-      .join(' ');
-    capturedLogs.push(formatted);
-    logs.push(formatted);
-  };
-
   try {
-    // Basic syntax sanity check or pre-evaluation
-    // Create a sandbox execution function that contains user code + test harness
     for (const testCase of testCases) {
       const caseLogs: string[] = [];
       let actualOutput: any = undefined;
@@ -37,53 +23,85 @@ export function runCodeAndTest(userCode: string, testCases: TestCase[]): CodeExe
       let errorMessage: string | undefined = undefined;
 
       try {
-        // Construct code that returns the evaluation of the test function call
-        const runnerScript = `
-          ${userCode}
+        const fnCall = testCase.testFnCall.trim();
 
-          if (typeof ${testCase.testFnCall.split('(')[0]} !== 'function' && typeof ${testCase.testFnCall} === 'undefined') {
-            // Check if user code defined the function or variable
+        // 1. Check if test assertion is a HTML / DOM or String Pattern Check
+        if (fnCall.startsWith('CONTAINS:')) {
+          const targetPattern = fnCall.replace('CONTAINS:', '').trim();
+          const cleanCode = userCode.toLowerCase();
+          const cleanTarget = targetPattern.toLowerCase();
+
+          passed = cleanCode.includes(cleanTarget);
+          actualOutput = passed ? `រកឃើញ "${targetPattern}"` : `រកមិនឃើញ "${targetPattern}" នៅក្នុងកូដ`;
+        }
+        // 2. Check REGEX assertion
+        else if (fnCall.startsWith('REGEX:')) {
+          const regexStr = fnCall.replace('REGEX:', '').trim();
+          const regex = new RegExp(regexStr, 'i');
+          passed = regex.test(userCode);
+          actualOutput = passed ? `កូដស្របតាមលក្ខខណ្ឌ ${regexStr}` : `កូដមិនត្រូវតាមលក្ខខណ្ឌ ${regexStr}`;
+        }
+        // 3. Check ROUTE / BACKEND SIMULATION (Express/NestJS/Laravel)
+        else if (fnCall.startsWith('EVAL:')) {
+          const expr = fnCall.replace('EVAL:', '').trim();
+          const customConsole = {
+            log: (...args: any[]) => {
+              const str = args.map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' ');
+              caseLogs.push(str);
+              logs.push(`[${testCase.inputDescription}] ${str}`);
+            },
+          };
+          const runnerScript = `
+            ${userCode}
+            return ${expr};
+          `;
+          const fn = new Function('console', runnerScript);
+          actualOutput = fn(customConsole);
+
+          const expectedTrimmed = String(testCase.expectedOutput).trim();
+          const actualTrimmed = String(actualOutput).trim();
+          passed = actualTrimmed === expectedTrimmed || actualTrimmed.includes(expectedTrimmed);
+        }
+        // 4. Standard JS / React function evaluation
+        else {
+          const customConsole = {
+            log: (...args: any[]) => {
+              const str = args.map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' ');
+              caseLogs.push(str);
+              logs.push(`[${testCase.inputDescription}] ${str}`);
+            },
+          };
+
+          const runnerScript = `
+            ${userCode}
+            return ${fnCall};
+          `;
+
+          const fn = new Function('console', runnerScript);
+          actualOutput = fn(customConsole);
+
+          let normalizedActual = actualOutput;
+          if (typeof actualOutput === 'object' && actualOutput !== null) {
+            normalizedActual = JSON.stringify(actualOutput);
+          } else {
+            normalizedActual = String(actualOutput);
           }
 
-          return ${testCase.testFnCall};
-        `;
+          const expectedTrimmed = String(testCase.expectedOutput).trim();
+          const actualTrimmed = String(normalizedActual).trim();
 
-        // Execute inFunction context with custom console
-        const customConsole = {
-          log: (...args: any[]) => {
-            const str = args.map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' ');
-            caseLogs.push(str);
-            logs.push(`[${testCase.inputDescription}] ${str}`);
-          },
-        };
-
-        const fn = new Function('console', runnerScript);
-        actualOutput = fn(customConsole);
-
-        // Normalize expected vs actual
-        let normalizedActual = actualOutput;
-        if (typeof actualOutput === 'object' && actualOutput !== null) {
-          normalizedActual = JSON.stringify(actualOutput);
-        } else {
-          normalizedActual = String(actualOutput);
-        }
-
-        const expectedTrimmed = String(testCase.expectedOutput).trim();
-        const actualTrimmed = String(normalizedActual).trim();
-
-        // Compare values
-        if (actualTrimmed === expectedTrimmed) {
-          passed = true;
-        } else {
-          // Try loose JSON parsed comparison if applicable
-          try {
-            const parsedActual = JSON.parse(actualTrimmed);
-            const parsedExpected = JSON.parse(expectedTrimmed);
-            if (JSON.stringify(parsedActual) === JSON.stringify(parsedExpected)) {
-              passed = true;
+          if (actualTrimmed === expectedTrimmed) {
+            passed = true;
+          } else {
+            try {
+              const parsedActual = JSON.parse(actualTrimmed);
+              const parsedExpected = JSON.parse(expectedTrimmed);
+              if (JSON.stringify(parsedActual) === JSON.stringify(parsedExpected)) {
+                passed = true;
+              }
+            } catch {
+              // Direct match failed
             }
-          } catch {
-            // Keep direct compare result
           }
         }
       } catch (err: any) {

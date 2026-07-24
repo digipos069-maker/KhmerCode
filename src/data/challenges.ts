@@ -1,10 +1,149 @@
-import { CodingChallenge } from '../types';
+import { CodingChallenge, LanguageTrack } from '../types';
+
+export const ALL_LANGUAGE_TRACKS: LanguageTrack[] = [
+  {
+    id: 'javascript',
+    nameKhmer: 'JavaScript (JS)',
+    nameEn: 'JavaScript',
+    icon: '⚡',
+    color: 'from-amber-400 to-yellow-500',
+    borderColor: 'border-amber-400',
+    badgeBg: 'bg-amber-500/20 text-amber-300',
+    descriptionKhmer: 'ភាសាសរសេរកូដគ្រឹះពេញនិយមបំផុតសម្រាប់ Web & Mobile',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'html',
+    nameKhmer: 'HTML5 Web',
+    nameEn: 'HTML5',
+    icon: '🌐',
+    color: 'from-orange-500 to-red-500',
+    borderColor: 'border-orange-500',
+    badgeBg: 'bg-orange-500/20 text-orange-300',
+    descriptionKhmer: 'រចនាសម្ព័ន្ធគេហទំព័រ Semantic Elements, Forms & Tables',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'css',
+    nameKhmer: 'CSS3 Styling',
+    nameEn: 'CSS3',
+    icon: '🎨',
+    color: 'from-blue-500 to-indigo-500',
+    borderColor: 'border-blue-500',
+    badgeBg: 'bg-blue-500/20 text-blue-300',
+    descriptionKhmer: 'ការដេគ័រគេហទំព័រ Flexbox, Grid, Animations & Themes',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'tailwindcss',
+    nameKhmer: 'Tailwind CSS',
+    nameEn: 'TailwindCSS',
+    icon: '🌊',
+    color: 'from-cyan-400 to-blue-500',
+    borderColor: 'border-cyan-400',
+    badgeBg: 'bg-cyan-500/20 text-cyan-300',
+    descriptionKhmer: 'Utility-first CSS Framework សម្រាប់ UI ស្អាត និងលឿន',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'reactjs',
+    nameKhmer: 'ReactJS',
+    nameEn: 'React.js',
+    icon: '⚛️',
+    color: 'from-sky-400 to-cyan-500',
+    borderColor: 'border-sky-400',
+    badgeBg: 'bg-sky-500/20 text-sky-300',
+    descriptionKhmer: 'UI Library ពេញនិយមលំដាប់ពិភពលោក Components, Hooks & State',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'vuejs',
+    nameKhmer: 'VueJS',
+    nameEn: 'Vue.js',
+    icon: '💚',
+    color: 'from-emerald-400 to-teal-500',
+    borderColor: 'border-emerald-400',
+    badgeBg: 'bg-emerald-500/20 text-emerald-300',
+    descriptionKhmer: 'Progressive Framework ងាយស្រួលរៀន Reactive Directives',
+    categoryType: 'frontend',
+  },
+  {
+    id: 'nuxtjs',
+    nameKhmer: 'NuxtJS',
+    nameEn: 'Nuxt.js',
+    icon: '⛰️',
+    color: 'from-emerald-500 to-green-600',
+    borderColor: 'border-emerald-500',
+    badgeBg: 'bg-emerald-600/20 text-emerald-300',
+    descriptionKhmer: 'Vue Fullstack Framework សម្រាប់ការបង្កើត SSR & SEO Apps',
+    categoryType: 'fullstack',
+  },
+  {
+    id: 'nextjs',
+    nameKhmer: 'NextJS',
+    nameEn: 'Next.js',
+    icon: '▲',
+    color: 'from-slate-200 to-white',
+    borderColor: 'border-slate-300',
+    badgeBg: 'bg-slate-700/50 text-slate-200',
+    descriptionKhmer: 'React Production Framework Server Components & App Router',
+    categoryType: 'fullstack',
+  },
+  {
+    id: 'nodejs',
+    nameKhmer: 'NodeJS',
+    nameEn: 'Node.js',
+    icon: '🟢',
+    color: 'from-green-500 to-emerald-600',
+    borderColor: 'border-green-500',
+    badgeBg: 'bg-green-500/20 text-green-300',
+    descriptionKhmer: 'JavaScript Server Runtime, File System, Modules & Buffers',
+    categoryType: 'backend',
+  },
+  {
+    id: 'express',
+    nameKhmer: 'ExpressJS',
+    nameEn: 'Express.js',
+    icon: '🚂',
+    color: 'from-purple-400 to-indigo-500',
+    borderColor: 'border-purple-400',
+    badgeBg: 'bg-purple-500/20 text-purple-300',
+    descriptionKhmer: 'Fast Minimalist Web Framework សម្រាប់ RESTful APIs',
+    categoryType: 'backend',
+  },
+  {
+    id: 'nestjs',
+    nameKhmer: 'NestJS',
+    nameEn: 'NestJS',
+    icon: '🦁',
+    color: 'from-red-500 to-rose-600',
+    borderColor: 'border-red-500',
+    badgeBg: 'bg-red-500/20 text-red-300',
+    descriptionKhmer: 'Enterprise Node.js Framework ជាមួយ TypeScript, Decorators & Injectable',
+    categoryType: 'backend',
+  },
+  {
+    id: 'laravel',
+    nameKhmer: 'Laravel (PHP)',
+    nameEn: 'Laravel PHP',
+    icon: '🔴',
+    color: 'from-red-600 to-orange-600',
+    borderColor: 'border-red-600',
+    badgeBg: 'bg-red-600/20 text-red-300',
+    descriptionKhmer: 'PHP Web Framework ដ៏ល្បីល្បាញ Blade Templates, Eloquent ORM & Controllers',
+    categoryType: 'backend',
+  },
+];
 
 export const KHMER_CODING_CHALLENGES: CodingChallenge[] = [
+  // -------------------------------------------------------------
+  // 1. JAVASCRIPT TRACK
+  // -------------------------------------------------------------
   {
     id: 'quest-1',
+    language: 'javascript',
     levelNum: 1,
-    titleKhmer: 'ជំហានដំបូងនៃកូដ',
+    titleKhmer: 'ជំហានដំបូងនៃកូដ JS',
     titleEn: 'Hello World & Print',
     category: 'basics',
     difficulty: 'ងាយស្រួល',
@@ -12,401 +151,339 @@ export const KHMER_CODING_CHALLENGES: CodingChallenge[] = [
     gems: 10,
     storyKhmer: '🧙‍♂️ គ្រូមន្តអាគមខ្មែរត្រូវការបង្កើតពាក្យសព្ទស្វាគមន៍ដំបូងគេដើម្បីបើកទ្វារប្រាសាទកូដ! ចែករំលែកសារ "សួស្តីកម្ពុជា" ទៅកាន់អេក្រង់ console។',
     descriptionKhmer: 'បង្កើតអនុគមន៍ `sayHello()` ដែលរ៉ីថើន (return) នូវអត្ថបទ `"សួស្តីកម្ពុជា"`។',
-    theoryKhmer: '💡 **ការបង្ហាញអត្ថបទ (Return Value)**\n\nនៅក្នុង JavaScript ពាក្យ `return` ត្រូវបានប្រើប្រាស់ដើម្បីបញ្ជូនតម្លៃចេញពីអនុគមន៍ (Function)។\n\n**ឧទាហរណ៍:**\n```js\nfunction getGreeting() {\n  return "សួស្តី!";\n}\n```',
+    theoryKhmer: '💡 **ការបង្ហាញអត្ថបទ (Return Value)**\n\nនៅក្នុង JavaScript ពាក្យ `return` ត្រូវបានប្រើប្រាស់ដើម្បីបញ្ជូនតម្លៃចេញពីអនុគមន៍ (Function)។',
     keyConcepts: ['function', 'return', 'string'],
-    starterCode: `// ទទួលបានការស្វាគមន៍
-function sayHello() {
-  // សរសេរកូដរ៉ីថើន "សួស្តីកម្ពុជា" នៅទីនេះ
-  return "";
-}`,
+    starterCode: `function sayHello() {\n  // សរសេរកូដរ៉ីថើន "សួស្តីកម្ពុជា" នៅទីនេះ\n  return "";\n}`,
     solutionHintKhmer: 'ផ្លាស់ប្តូរតម្លៃនៅក្នុង return "" ទៅជា "សួស្តីកម្ពុជា"',
-    solutionCode: `function sayHello() {
-  return "សួស្តីកម្ពុជា";
-}`,
+    solutionCode: `function sayHello() {\n  return "សួស្តីកម្ពុជា";\n}`,
     testCases: [
       {
         id: 't1-1',
         inputDescription: 'sayHello()',
         testFnCall: 'sayHello()',
         expectedOutput: 'សួស្តីកម្ពុជា',
-        explanationKhmer: 'អនុគមន៍ត្រូវតែរ៉ីថើនត្រង់ៗនូវ "សួស្តីកម្ពុជា"',
       },
     ],
   },
   {
     id: 'quest-2',
+    language: 'javascript',
     levelNum: 2,
-    titleKhmer: 'ប្រអប់រក្សាទុកទិន្នន័យ (អថេរ)',
-    titleEn: 'Variables & Addition',
+    titleKhmer: 'ការធ្វើសេចក្តីសម្រេច (If/Else)',
+    titleEn: 'Conditional Access Check',
+    category: 'control_flow',
+    difficulty: 'ងាយស្រួល',
+    xp: 80,
+    gems: 15,
+    storyKhmer: '🛡️ អ្នកយាមទ្វារប្រាសាទត្រួតពិនិត្យអាយុអ្នកក្លាហាន! ប្រសិនបើអាយុចាប់ពី ១៨ ឆ្នាំឡើងទៅ បង្ហាញ "អនុញ្ញាត" បើមិនដូច្នោះទេ "បដិសេធ"។',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `checkAccess(age)`:\n- ប្រសិនបើ `age >= 18` ត្រូវ return `"អនុញ្ញាត"`\n- បើមិនដូច្នោះទេ ត្រូវ return `"បដិសេធ"`',
+    theoryKhmer: '💡 **លក្ខខណ្ឌ If / Else**\n\n```js\nif (age >= 18) {\n  return "អនុញ្ញាត";\n} else {\n  return "បដិសេធ";\n}\n```',
+    keyConcepts: ['if-else', 'comparison'],
+    starterCode: `function checkAccess(age) {\n  if (age >= 18) {\n    return "";\n  }\n  return "";\n}`,
+    solutionHintKhmer: 'បើ age >= 18 return "អនុញ្ញាត" បើមិនចឹងទេ return "បដិសេធ"',
+    solutionCode: `function checkAccess(age) {\n  if (age >= 18) return "អនុញ្ញាត";\n  return "បដិសេធ";\n}`,
+    testCases: [
+      { id: 't2-1', inputDescription: 'checkAccess(20)', testFnCall: 'checkAccess(20)', expectedOutput: 'អនុញ្ញាត' },
+      { id: 't2-2', inputDescription: 'checkAccess(15)', testFnCall: 'checkAccess(15)', expectedOutput: 'បដិសេធ' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 2. HTML TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-html-1',
+    language: 'html',
+    levelNum: 1,
+    titleKhmer: 'បង្កើតចំណងជើង និងអត្ថបទ HTML',
+    titleEn: 'HTML Headings & Paragraphs',
     category: 'basics',
+    difficulty: 'ងាយស្រួល',
+    xp: 60,
+    gems: 12,
+    storyKhmer: '🌐 បង្កើតទំព័រដើមស្វាគមន៍អ្នកមកកាន់សាលាកូដខ្មែរ! សរសេរចំណងជើង <h1> និងឃ្លា <p>។',
+    descriptionKhmer: 'សរសេរកូដ HTML ដោយប្រើស្លាក `<h1>` សម្រាប់ចំណងជើង `"សាលាកូដខ្មែរ"` និងស្លាក `<p>` សម្រាប់អត្ថបទ `"រៀនសរសេរកូដជាភាសាខ្មែរ"`។',
+    theoryKhmer: '💡 **HTML Tags គ្រឹះ**\n\n- `<h1>...</h1>`: ចំណងជើងធំ\n- `<p>...</p>`: អត្ថបទកថាខណ្ឌ',
+    keyConcepts: ['html', 'h1', 'p'],
+    starterCode: `<!-- សរសេរកូដ HTML នៅទីនេះ -->\n<h1></h1>\n<p></p>`,
+    solutionHintKhmer: 'សរសេរ <h1>សាលាកូដខ្មែរ</h1> និង <p>រៀនសរសេរកូដជាភាសាខ្មែរ</p>',
+    solutionCode: `<h1>សាលាកូដខ្មែរ</h1>\n<p>រៀនសរសេរកូដជាភាសាខ្មែរ</p>`,
+    testCases: [
+      { id: 'th-1', inputDescription: 'មាន <h1>សាលាកូដខ្មែរ</h1>', testFnCall: 'CONTAINS: <h1>សាលាកូដខ្មែរ</h1>', expectedOutput: 'រកឃើញ "<h1>សាលាកូដខ្មែរ</h1>"' },
+      { id: 'th-2', inputDescription: 'មាន <p>រៀនសរសេរកូដជាភាសាខ្មែរ</p>', testFnCall: 'CONTAINS: <p>រៀនសរសេរកូដជាភាសាខ្មែរ</p>', expectedOutput: 'រកឃើញ "<p>រៀនសរសេរកូដជាភាសាខ្មែរ</p>"' },
+    ],
+  },
+  {
+    id: 'quest-html-2',
+    language: 'html',
+    levelNum: 2,
+    titleKhmer: 'បង្កើតប៊ូតុង និងទម្រង់បែបបទ (Form Button)',
+    titleEn: 'HTML Button & Input',
+    category: 'basics',
+    difficulty: 'ងាយស្រួល',
+    xp: 80,
+    gems: 15,
+    storyKhmer: '🔘 បង្កើតប៊ូតុងចុចចូលរៀនកូដខ្មែរ!',
+    descriptionKhmer: 'សរសេរធាតុ `<button class="btn">` ដែលមានអត្ថបទ `"ចុចចូលរៀន"`។',
+    theoryKhmer: '💡 **HTML Button**\n\n`<button>ចុចទីនេះ</button>` ត្រូវបានប្រើប្រាស់សម្រាប់បង្កើតប៊ូតុងអន្តរកម្ម។',
+    keyConcepts: ['button', 'html'],
+    starterCode: `<!-- បង្កើតប៊ូតុងនៅទីនេះ -->\n<button>ចុចទីនេះ</button>`,
+    solutionHintKhmer: 'ផ្លាស់ប្តូរអត្ថបទខាងក្នុង button ទៅជា "ចុចចូលរៀន"',
+    solutionCode: `<button>ចុចចូលរៀន</button>`,
+    testCases: [
+      { id: 'th2-1', inputDescription: 'មាន <button>ចុចចូលរៀន</button>', testFnCall: 'CONTAINS: ចុចចូលរៀន', expectedOutput: 'រកឃើញ "ចុចចូលរៀន"' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 3. CSS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-css-1',
+    language: 'css',
+    levelNum: 1,
+    titleKhmer: 'លម្អពណ៌ និងទំហំអក្សរ CSS',
+    titleEn: 'CSS Colors & Font Size',
+    category: 'styling',
+    difficulty: 'ងាយស្រួល',
+    xp: 65,
+    gems: 12,
+    storyKhmer: '🎨 តុបតែងចំណងជើងអោយមានពណ៌លឿងផ្លេក និងទំហំអក្សរ ២៤px!',
+    descriptionKhmer: 'សរសេរ CSS rule សម្រាប់ `.title` ដោយកំណត់ `color: gold;` និង `font-size: 24px;`។',
+    theoryKhmer: '💡 **CSS Properties**\n\n```css\n.title {\n  color: gold;\n  font-size: 24px;\n}\n```',
+    keyConcepts: ['css', 'color', 'font-size'],
+    starterCode: `.title {\n  /* កំណត់ពណ៌ និងទំហំអក្សរនៅទីនេះ */\n  color: white;\n}`,
+    solutionHintKhmer: 'កំណត់ color: gold; និង font-size: 24px;',
+    solutionCode: `.title {\n  color: gold;\n  font-size: 24px;\n}`,
+    testCases: [
+      { id: 'tc-1', inputDescription: 'កំណត់ color: gold', testFnCall: 'CONTAINS: color: gold', expectedOutput: 'រកឃើញ "color: gold"' },
+      { id: 'tc-2', inputDescription: 'កំណត់ font-size: 24px', testFnCall: 'CONTAINS: font-size: 24px', expectedOutput: 'រកឃើញ "font-size: 24px"' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 4. TAILWIND CSS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-tw-1',
+    language: 'tailwindcss',
+    levelNum: 1,
+    titleKhmer: 'រចនា Card ស្អាតជាមួយ Tailwind Classes',
+    titleEn: 'Tailwind Button & Card',
+    category: 'styling',
     difficulty: 'ងាយស្រួល',
     xp: 75,
     gems: 15,
-    storyKhmer: '⚔️ វីរបុរសបានរកឃើញកាបូបមាសពីរ! កាបូប A មាន $a$ កាក់ និងកាបូប B មាន $b$ កាក់។ គណនាកាក់សរុបទាំងអស់។',
-    descriptionKhmer: 'បង្កើតអនុគមន៍ `addGold(a, b)` ដែលទទួលប៉ារ៉ាម៉ែត្រពីរ ហើយរ៉ីថើនផលបូកនៃ `a + b`។',
-    theoryKhmer: '💡 **អថេរ និងប្រមាណវិធីបូក (+)**\n\nប៉ារ៉ាម៉ែត្រ `a` និង `b` គឺជាអថេរដែលរក្សាទុកលេខ។ យើងអាចបូកពួកវាចូលគ្នាដោយប្រើសញ្ញា `+`។\n\n**ឧទាហរណ៍:**\n```js\nfunction sum(x, y) {\n  return x + y;\n}\n```',
-    keyConcepts: ['variables', 'math', 'parameters'],
-    starterCode: `function addGold(a, b) {
-  // គណនាផលបូកកាក់ a និង b
-  return 0;
-}`,
-    solutionHintKhmer: 'ប្រទាក់ក្រឡាកូដ: return a + b;',
-    solutionCode: `function addGold(a, b) {
-  return a + b;
-}`,
+    storyKhmer: '🌊 ប្រើប្រាស់ Tailwind Utility Classes ដូចជា `bg-amber-500`, `text-slate-950`, `font-bold`!',
+    descriptionKhmer: 'សរសេរ HTML element ជាមួយ Tailwind CSS Classes ៖ `class="bg-amber-500 text-slate-950 px-4 py-2 rounded-xl font-bold"`',
+    theoryKhmer: '💡 **Tailwind Utility Classes**\n\n- `bg-amber-500`: ផ្ទៃក្រោយពណ៌លឿងរះ\n- `px-4 py-2`: Padding\n- `rounded-xl`: រាងមូលជ្រុង',
+    keyConcepts: ['tailwindcss', 'utility-classes'],
+    starterCode: `<button class="bg-amber-500 text-slate-950 px-4 py-2 rounded-xl font-bold">\n  រៀន TAILWIND\n</button>`,
+    solutionHintKhmer: 'ប្រាកដថាមាន class="bg-amber-500 text-slate-950 px-4 py-2 rounded-xl font-bold"',
+    solutionCode: `<button class="bg-amber-500 text-slate-950 px-4 py-2 rounded-xl font-bold">\n  រៀន TAILWIND\n</button>`,
     testCases: [
-      {
-        id: 't2-1',
-        inputDescription: 'addGold(10, 20)',
-        testFnCall: 'addGold(10, 20)',
-        expectedOutput: '30',
-      },
-      {
-        id: 't2-2',
-        inputDescription: 'addGold(100, 250)',
-        testFnCall: 'addGold(100, 250)',
-        expectedOutput: '350',
-      },
+      { id: 'ttw-1', inputDescription: 'មាន bg-amber-500', testFnCall: 'CONTAINS: bg-amber-500', expectedOutput: 'រកឃើញ "bg-amber-500"' },
+      { id: 'ttw-2', inputDescription: 'មាន rounded-xl', testFnCall: 'CONTAINS: rounded-xl', expectedOutput: 'រកឃើញ "rounded-xl"' },
     ],
   },
+
+  // -------------------------------------------------------------
+  // 5. REACTJS TRACK
+  // -------------------------------------------------------------
   {
-    id: 'quest-3',
-    levelNum: 3,
-    titleKhmer: 'ការធ្វើសេចក្តីសម្រេច (If/Else)',
-    titleEn: 'Conditional Logic',
-    category: 'control_flow',
-    difficulty: 'ងាយស្រួល',
-    xp: 100,
-    gems: 20,
-    storyKhmer: '🛡️ អ្នកយាមទ្វារប្រាសាទត្រួតពិនិត្យអាយុអ្នកក្លាហាន! ប្រសិនបើអាយុចាប់ពី ១៨ ឆ្នាំឡើងទៅ បង្ហាញ "អនុញ្ញាត" បើមិនដូច្នោះទេ "បដិសេធ"។',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `checkAccess(age)`:\n- ប្រសិនបើ `age >= 18` ត្រូវ return `"អនុញ្ញាត"`\n- បើមិនដូច្នោះទេ ត្រូវ return `"បដិសេធ"`',
-    theoryKhmer: '💡 **លក្ខខណ្ឌ If / Else**\n\nប្រើ `if` ដើម្បីពិនិត្យលក្ខខណ្ឌ:\n```js\nif (age >= 18) {\n  return "អនុញ្ញាត";\n} else {\n  return "បដិសេធ";\n}\n```',
-    keyConcepts: ['if-else', 'boolean', 'comparison'],
-    starterCode: `function checkAccess(age) {
-  // សរសេរលក្ខខណ្ឌ check ទីនេះ
-  if (age >= 18) {
-    return "";
-  }
-  return "";
-}`,
-    solutionHintKhmer: 'បើ age >= 18 return "អនុញ្ញាត" បើមិនចឹងទេ return "បដិសេធ"',
-    solutionCode: `function checkAccess(age) {
-  if (age >= 18) {
-    return "អនុញ្ញាត";
-  }
-  return "បដិសេធ";
-}`,
-    testCases: [
-      {
-        id: 't3-1',
-        inputDescription: 'checkAccess(20)',
-        testFnCall: 'checkAccess(20)',
-        expectedOutput: 'អនុញ្ញាត',
-      },
-      {
-        id: 't3-2',
-        inputDescription: 'checkAccess(15)',
-        testFnCall: 'checkAccess(15)',
-        expectedOutput: 'បដិសេធ',
-      },
-      {
-        id: 't3-3',
-        inputDescription: 'checkAccess(18)',
-        testFnCall: 'checkAccess(18)',
-        expectedOutput: 'អនុញ្ញាត',
-      },
-    ],
-  },
-  {
-    id: 'quest-4',
-    levelNum: 4,
-    titleKhmer: 'ការគណនាពិន្ទុប្រឡង (Grade Calculator)',
-    titleEn: 'Multiple Conditions',
-    category: 'control_flow',
+    id: 'quest-react-1',
+    language: 'reactjs',
+    levelNum: 1,
+    titleKhmer: 'បង្កើត Component ដំបូង និង State (useState)',
+    titleEn: 'React Component & Counter State',
+    category: 'components',
     difficulty: 'មធ្យម',
     xp: 120,
     gems: 25,
-    storyKhmer: '📜 គ្រូបង្រៀនកូដចង់បង្កើតប្រព័ន្ធស្វ័យប្រវត្តិដើម្បីកំណត់និទ្ទេសសិស្សកម្ពុជា!',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `getGrade(score)`:\n- ពិន្ទុ >= 90: return `"A"`\n- ពិន្ទុ >= 80: return `"B"`\n- ពិន្ទុ >= 70: return `"C"`\n- តិចជាង 70: return `"F"`',
-    theoryKhmer: '💡 **If / Else If / Else**\n\n```js\nif (score >= 90) {\n  return "A";\n} else if (score >= 80) {\n  return "B";\n} ...\n```',
-    keyConcepts: ['else if', 'grading logic'],
-    starterCode: `function getGrade(score) {
-  // សរសេរលក្ខខណ្ឌកាត់សេចក្តីពិន្ទុ
-  return "F";
-}`,
-    solutionHintKhmer: 'ប្រើ if () ... else if () ... តាមលំដាប់ពិន្ទុពីធំទៅតូច',
-    solutionCode: `function getGrade(score) {
-  if (score >= 90) return "A";
-  if (score >= 80) return "B";
-  if (score >= 70) return "C";
-  return "F";
-}`,
+    storyKhmer: '⚛️ បង្កើត React Component ចំនួនកើនឡើង (Counter Component) ប្រើប្រាស់ `useState` Hook!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ React Component `Counter()` ដែល return JSX ជាមួយប៊ូតុងចុចបង្កើនពិន្ទុ:',
+    theoryKhmer: '💡 **React useState Hook**\n\n```jsx\nconst [count, setCount] = useState(0);\n```',
+    keyConcepts: ['react', 'useState', 'jsx'],
+    starterCode: `function Counter() {\n  const [count, setCount] = React.useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      ពិន្ទុ: {count}\n    </button>\n  );\n}`,
+    solutionHintKhmer: 'ប្រើ React.useState(0) និង <button onClick={...}>',
+    solutionCode: `function Counter() {\n  const [count, setCount] = React.useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      ពិន្ទុ: {count}\n    </button>\n  );\n}`,
     testCases: [
-      {
-        id: 't4-1',
-        inputDescription: 'getGrade(95)',
-        testFnCall: 'getGrade(95)',
-        expectedOutput: 'A',
-      },
-      {
-        id: 't4-2',
-        inputDescription: 'getGrade(83)',
-        testFnCall: 'getGrade(83)',
-        expectedOutput: 'B',
-      },
-      {
-        id: 't4-3',
-        inputDescription: 'getGrade(65)',
-        testFnCall: 'getGrade(65)',
-        expectedOutput: 'F',
-      },
+      { id: 'tr-1', inputDescription: 'មាន useState', testFnCall: 'CONTAINS: useState', expectedOutput: 'រកឃើញ "useState"' },
     ],
   },
+
+  // -------------------------------------------------------------
+  // 6. VUEJS TRACK
+  // -------------------------------------------------------------
   {
-    id: 'quest-5',
-    levelNum: 5,
-    titleKhmer: 'កម្លាំងនៃរង្វិលជុំ (Sum up to N)',
-    titleEn: 'Loops & Accumulation',
-    category: 'functions',
+    id: 'quest-vue-1',
+    language: 'vuejs',
+    levelNum: 1,
+    titleKhmer: 'ការប្រើប្រាស់ Vue Ref និង Click Event',
+    titleEn: 'Vue 3 Composition API ref()',
+    category: 'components',
+    difficulty: 'មធ្យម',
+    xp: 120,
+    gems: 25,
+    storyKhmer: '💚 បង្កើត reactive state ជាមួយ `ref()` ក្នុង Vue 3!',
+    descriptionKhmer: 'សរសេរកូដ Vue Component ដោយប្រើ `ref("សួស្តី Vue")` និងរ៉ីថើនតម្លៃ reactive message។',
+    theoryKhmer: '💡 **Vue 3 ref()**\n\n```js\nconst message = ref("សួស្តី Vue");\n```',
+    keyConcepts: ['vue', 'ref', 'composition-api'],
+    starterCode: `function createVueApp() {\n  const message = ref("សួស្តី Vue");\n  return message.value;\n}`,
+    solutionHintKhmer: 'កំណត់ const message = ref("សួស្តី Vue");',
+    solutionCode: `function createVueApp() {\n  const message = ref("សួស្តី Vue");\n  return message.value;\n}`,
+    testCases: [
+      { id: 'tv-1', inputDescription: 'មាន ref("សួស្តី Vue")', testFnCall: 'CONTAINS: ref("សួស្តី Vue")', expectedOutput: 'រកឃើញ "ref("សួស្តី Vue")"' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 7. NUXTJS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-nuxt-1',
+    language: 'nuxtjs',
+    levelNum: 1,
+    titleKhmer: 'Nuxt 3 Auto-Imports និង Page Routing',
+    titleEn: 'Nuxt 3 Pages & useFetch',
+    category: 'routing',
+    difficulty: 'មធ្យម',
+    xp: 140,
+    gems: 28,
+    storyKhmer: '⛰️ ប្រើប្រាស់ `definePageMeta` និង `useFetch()` ក្នុង Nuxt 3!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `getNuxtConfig()` ដែល return Object `{ ssr: true, target: "server" }`។',
+    theoryKhmer: '💡 **Nuxt 3 SSR Feature**\n\nNuxt ផ្តល់នូវ Server-Side Rendering ដោយស្វ័យប្រវត្តិ។',
+    keyConcepts: ['nuxt', 'ssr', 'vue-framework'],
+    starterCode: `function getNuxtConfig() {\n  return {\n    ssr: true,\n    target: "server"\n  };\n}`,
+    solutionHintKhmer: 'return { ssr: true, target: "server" };',
+    solutionCode: `function getNuxtConfig() {\n  return {\n    ssr: true,\n    target: "server"\n  };\n}`,
+    testCases: [
+      { id: 'tnx-1', inputDescription: 'getNuxtConfig()', testFnCall: 'getNuxtConfig().ssr', expectedOutput: 'true' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 8. NEXTJS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-next-1',
+    language: 'nextjs',
+    levelNum: 1,
+    titleKhmer: 'Next.js App Router & Server Components',
+    titleEn: 'Next.js App Router Page',
+    category: 'routing',
     difficulty: 'មធ្យម',
     xp: 150,
     gems: 30,
-    storyKhmer: '🌀 វេទមន្តរង្វិលជុំ! គណនាផលបូកលេខតាំងពី ១ រហូតដល់ $N$ (ឧទាហរណ៍: ១ + ២ + ៣ + ... + N)។',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `sumUpTo(n)` ដែលប្រើរង្វិលជុំ `for` loop ដើម្បីបូកលេខពី 1 ដល់ n រួច return ផលបូកនោះ។',
-    theoryKhmer: '💡 **រង្វិលជុំ For Loop**\n\n```js\nlet total = 0;\nfor (let i = 1; i <= n; i++) {\n  total += i;\n}\nreturn total;\n```',
-    keyConcepts: ['for-loop', 'accumulator'],
-    starterCode: `function sumUpTo(n) {
-  let total = 0;
-  // ប្រើរង្វិលជុំ for loop ទីនេះ
-  
-  return total;
-}`,
-    solutionHintKhmer: 'បង្កើតរង្វិលជុំ for (let i = 1; i <= n; i++) រួចបូកចូល total',
-    solutionCode: `function sumUpTo(n) {
-  let total = 0;
-  for (let i = 1; i <= n; i++) {
-    total += i;
-  }
-  return total;
-}`,
+    storyKhmer: '▲ បង្កើត Next.js Page Component ក្នុងទីតាំង `app/page.tsx`!',
+    descriptionKhmer: 'សរសេរ Next.js Server Component `HomePage()` រ៉ីថើនចំណងជើង `"ស្វាគមន៍មកកាន់ Next.js Khmer"`។',
+    theoryKhmer: '💡 **Next.js React Server Components**\n\n```tsx\nexport default function HomePage() {\n  return <h1>ស្វាគមន៍មកកាន់ Next.js Khmer</h1>;\n}\n```',
+    keyConcepts: ['nextjs', 'app-router', 'server-components'],
+    starterCode: `function HomePage() {\n  return "ស្វាគមន៍មកកាន់ Next.js Khmer";\n}`,
+    solutionHintKhmer: 'return "ស្វាគមន៍មកកាន់ Next.js Khmer";',
+    solutionCode: `function HomePage() {\n  return "ស្វាគមន៍មកកាន់ Next.js Khmer";\n}`,
     testCases: [
-      {
-        id: 't5-1',
-        inputDescription: 'sumUpTo(5)',
-        testFnCall: 'sumUpTo(5)',
-        expectedOutput: '15',
-        explanationKhmer: '1 + 2 + 3 + 4 + 5 = 15',
-      },
-      {
-        id: 't5-2',
-        inputDescription: 'sumUpTo(10)',
-        testFnCall: 'sumUpTo(10)',
-        expectedOutput: '55',
-      },
+      { id: 'tnext-1', inputDescription: 'HomePage()', testFnCall: 'HomePage()', expectedOutput: 'ស្វាគមន៍មកកាន់ Next.js Khmer' },
     ],
   },
+
+  // -------------------------------------------------------------
+  // 9. NODEJS TRACK
+  // -------------------------------------------------------------
   {
-    id: 'quest-6',
-    levelNum: 6,
-    titleKhmer: 'ការគ្រប់គ្រងកន្ត្រកទិន្នន័យ (Arrays)',
-    titleEn: 'Array Filtering & Odd/Even',
-    category: 'arrays',
+    id: 'quest-node-1',
+    language: 'nodejs',
+    levelNum: 1,
+    titleKhmer: 'Node.js File System & Buffer Operations',
+    titleEn: 'Node.js fs module & path',
+    category: 'backend',
     difficulty: 'មធ្យម',
+    xp: 130,
+    gems: 25,
+    storyKhmer: '🟢 គ្រប់គ្រងប្រព័ន្ធឯកសារ File System ជាមួយ Node.js!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `formatFilePath(dir, fileName)` ប្រើ `path.join` គំរូ ៖ `return \`\${dir}/\${fileName}\`;`',
+    theoryKhmer: '💡 **Node.js Core Modules**\n\n```js\nconst path = require("path");\n```',
+    keyConcepts: ['nodejs', 'path', 'backend'],
+    starterCode: `function formatFilePath(dir, fileName) {\n  return \`\${dir}/\${fileName}\`;\n}`,
+    solutionHintKhmer: ' return `${dir}/${fileName}`;',
+    solutionCode: `function formatFilePath(dir, fileName) {\n  return \`\${dir}/\${fileName}\`;\n}`,
+    testCases: [
+      { id: 'tnode-1', inputDescription: 'formatFilePath("/data", "user.json")', testFnCall: 'formatFilePath("/data", "user.json")', expectedOutput: '/data/user.json' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 10. EXPRESSJS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-express-1',
+    language: 'express',
+    levelNum: 1,
+    titleKhmer: 'បង្កើត REST API Route ដំបូងគេ ជាមួយ Express',
+    titleEn: 'Express GET /api/users Route',
+    category: 'backend',
+    difficulty: 'មធ្យម',
+    xp: 150,
+    gems: 30,
+    storyKhmer: '🚂 បង្កើត Express Backend Server សម្រាប់ផ្តល់ទិន្នន័យ JSON!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `createExpressRoute(req, res)` ដែល return JSON Object `{ status: 200, message: "ជោគជ័យ" }`។',
+    theoryKhmer: '💡 **Express Routing**\n\n```js\napp.get("/api/health", (req, res) => {\n  res.json({ status: "ok" });\n});\n```',
+    keyConcepts: ['express', 'rest-api', 'json'],
+    starterCode: `function handleApiRequest() {\n  return { status: 200, message: "ជោគជ័យ" };\n}`,
+    solutionHintKhmer: 'return { status: 200, message: "ជោគជ័យ" };',
+    solutionCode: `function handleApiRequest() {\n  return { status: 200, message: "ជោគជ័យ" };\n}`,
+    testCases: [
+      { id: 'texp-1', inputDescription: 'handleApiRequest().status', testFnCall: 'handleApiRequest().status', expectedOutput: '200' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 11. NESTJS TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-nest-1',
+    language: 'nestjs',
+    levelNum: 1,
+    titleKhmer: 'NestJS Controller @Get() Decorator',
+    titleEn: 'NestJS Controller & Service Injection',
+    category: 'backend',
+    difficulty: 'ពិបាក',
     xp: 180,
     gems: 35,
-    storyKhmer: '🧺 អ្នកភូមិត្រូវការរៀបចំផ្លែឈើ! គណនាចំនួនលេខគូ (Even Numbers) នៅក្នុងបញ្ជីកន្ត្រក។',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `countEvenNumbers(numbers)` ដែលទទួល Array នៃលេខ រួច return ចំនួនធាតុណាដែលជាលេខគូ (ចែកដាច់នឹង ២)។',
-    theoryKhmer: '💡 **ការរាប់ធាតុក្នុង Array ជាមួយ % Modulo**\n\nលេខគូគឺលេខដែល % 2 === 0:\n```js\nlet count = 0;\nfor (let num of numbers) {\n  if (num % 2 === 0) count++;\n}\nreturn count;\n```',
-    keyConcepts: ['arrays', 'modulo', 'counting'],
-    starterCode: `function countEvenNumbers(numbers) {
-  let count = 0;
-  // សរសេរកូដរាប់លេខគូក្នុងកន្ត្រក
-  return count;
-}`,
-    solutionHintKhmer: 'ប្រើ for (let num of numbers) { if (num % 2 === 0) count++; }',
-    solutionCode: `function countEvenNumbers(numbers) {
-  let count = 0;
-  for (let num of numbers) {
-    if (num % 2 === 0) {
-      count++;
-    }
-  }
-  return count;
-}`,
+    storyKhmer: '🦁 បង្កើត Enterprise Architecture ជាមួយ NestJS Controllers & TypeScript!',
+    descriptionKhmer: 'សរសេរ NestJS Service method `getHello()` ដែល return `"សួស្តីពី NestJS Enterprise Server"`។',
+    theoryKhmer: '💡 **NestJS Decorators**\n\n```ts\n@Controller("users")\nexport class UsersController {}\n```',
+    keyConcepts: ['nestjs', 'typescript', 'decorators'],
+    starterCode: `class AppService {\n  getHello() {\n    return "សួស្តីពី NestJS Enterprise Server";\n  }\n}\nfunction testNest() {\n  const s = new AppService();\n  return s.getHello();\n}`,
+    solutionHintKhmer: ' return "សួស្តីពី NestJS Enterprise Server";',
+    solutionCode: `class AppService {\n  getHello() {\n    return "សួស្តីពី NestJS Enterprise Server";\n  }\n}\nfunction testNest() {\n  const s = new AppService();\n  return s.getHello();\n}`,
     testCases: [
-      {
-        id: 't6-1',
-        inputDescription: 'countEvenNumbers([1, 2, 3, 4, 6])',
-        testFnCall: 'countEvenNumbers([1, 2, 3, 4, 6])',
-        expectedOutput: '3',
-        explanationKhmer: 'លេខគូមាន: 2, 4, 6 (សរុប ៣)',
-      },
-      {
-        id: 't6-2',
-        inputDescription: 'countEvenNumbers([1, 3, 5, 7])',
-        testFnCall: 'countEvenNumbers([1, 3, 5, 7])',
-        expectedOutput: '0',
-      },
+      { id: 'tnest-1', inputDescription: 'testNest()', testFnCall: 'testNest()', expectedOutput: 'សួស្តីពី NestJS Enterprise Server' },
     ],
   },
+
+  // -------------------------------------------------------------
+  // 12. LARAVEL TRACK
+  // -------------------------------------------------------------
   {
-    id: 'quest-7',
-    levelNum: 7,
-    titleKhmer: 'ស្វែងរកលេខអតិបរមា (Max Value)',
-    titleEn: 'Find Max in Array',
-    category: 'arrays',
-    difficulty: 'ពិបាក',
-    xp: 220,
-    gems: 40,
-    storyKhmer: '👑 រកមើលអ្នកជើងខ្លាំងដែលមានពិន្ទុខ្ពស់បំផុតក្នុងព្រះរាជាណាចក្រកូដ!',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `findMax(numbers)` ដែលរកលេខដែលធំបំផុតនៅក្នុង Array។ បើ Array ទទេ ត្រូវ return `null`។',
-    theoryKhmer: '💡 **ការរកតម្លៃអតិបរមា**\n\nកំណត់ `let max = numbers[0];` រួចប្រៀបធៀបគ្រប់ធាតុក្នុង Array:\n```js\nif (numbers.length === 0) return null;\nlet max = numbers[0];\nfor (let num of numbers) {\n  if (num > max) max = num;\n}\nreturn max;\n```',
-    keyConcepts: ['algorithm', 'arrays', 'max-search'],
-    starterCode: `function findMax(numbers) {
-  if (numbers.length === 0) return null;
-  // សរសេរកូដរកលេខធំបំផុត
-  return 0;
-}`,
-    solutionHintKhmer: 'កំណត់ max = numbers[0] រួច loop ពិនិត្យបើ num > max នោះ max = num',
-    solutionCode: `function findMax(numbers) {
-  if (numbers.length === 0) return null;
-  let max = numbers[0];
-  for (let num of numbers) {
-    if (num > max) {
-      max = num;
-    }
-  }
-  return max;
-}`,
+    id: 'quest-laravel-1',
+    language: 'laravel',
+    levelNum: 1,
+    titleKhmer: 'Laravel Route & Controller Response',
+    titleEn: 'Laravel PHP Route::get()',
+    category: 'backend',
+    difficulty: 'មធ្យម',
+    xp: 150,
+    gems: 30,
+    storyKhmer: '🔴 បង្កើត Web Route ក្នុងគេហទំព័រ Laravel ដោយប្រើ PHP!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `laravelRoute()` ដែលត្រឡប់អត្ថបទ `"Laravel Khmer Framework Ready"`។',
+    theoryKhmer: '💡 **Laravel Routing in PHP**\n\n```php\nRoute::get("/home", function () {\n  return view("welcome");\n});\n```',
+    keyConcepts: ['laravel', 'php', 'routing'],
+    starterCode: `function laravelRoute() {\n  // return "Laravel Khmer Framework Ready"\n  return "Laravel Khmer Framework Ready";\n}`,
+    solutionHintKhmer: 'return "Laravel Khmer Framework Ready";',
+    solutionCode: `function laravelRoute() {\n  return "Laravel Khmer Framework Ready";\n}`,
     testCases: [
-      {
-        id: 't7-1',
-        inputDescription: 'findMax([12, 45, 8, 99, 23])',
-        testFnCall: 'findMax([12, 45, 8, 99, 23])',
-        expectedOutput: '99',
-      },
-      {
-        id: 't7-2',
-        inputDescription: 'findMax([-5, -2, -10])',
-        testFnCall: 'findMax([-5, -2, -10])',
-        expectedOutput: '-2',
-      },
-    ],
-  },
-  {
-    id: 'quest-8',
-    levelNum: 8,
-    titleKhmer: 'វត្ថុ និងប្រវត្តិវីរបុរស (Objects)',
-    titleEn: 'Object Properties & Formatting',
-    category: 'objects',
-    difficulty: 'ពិបាក',
-    xp: 250,
-    gems: 50,
-    storyKhmer: '💎 បង្កើតទម្រង់កាតព័ត៌មានវីរបុរសជាអត្ថបទស្អាតស្អំ!',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `formatHero(hero)` ដែលទទួល Object `{ name: "សុខា", level: 10, role: "អ្នកកូដ" }` រួច return អត្ថបទទម្រង់:\n`"សុខា (កម្រិត 10 - អ្នកកូដ)"`',
-    theoryKhmer: '💡 **ការប្រើប្រាស់ Object Properties**\n\nយើងអាចទាញយកតម្លៃតាមរយៈ `hero.name`, `hero.level`, `hero.role` ឬប្រើ Template Literals (\`...\`)។',
-    keyConcepts: ['objects', 'string-formatting'],
-    starterCode: `function formatHero(hero) {
-  // hero មាន properties: name, level, role
-  return "";
-}`,
-    solutionHintKhmer: ' return `${hero.name} (កម្រិត ${hero.level} - ${hero.role})`;',
-    solutionCode: `function formatHero(hero) {
-  return \`\${hero.name} (កម្រិត \${hero.level} - \${hero.role})\`;
-}`,
-    testCases: [
-      {
-        id: 't8-1',
-        inputDescription: 'formatHero({ name: "សុខា", level: 10, role: "អ្នកកូដ" })',
-        testFnCall: 'formatHero({ name: "សុខា", level: 10, role: "អ្នកកូដ" })',
-        expectedOutput: 'សុខា (កម្រិត 10 - អ្នកកូដ)',
-      },
-      {
-        id: 't8-2',
-        inputDescription: 'formatHero({ name: "វិចិត្រ", level: 25, role: "មេសរសេរកូដ" })',
-        testFnCall: 'formatHero({ name: "វិចិត្រ", level: 25, role: "មេសរសេរកូដ" })',
-        expectedOutput: 'វិចិត្រ (កម្រិត 25 - មេសរសេរកូដ)',
-      },
-    ],
-  },
-  {
-    id: 'quest-9',
-    levelNum: 9,
-    titleKhmer: 'ត្រឡប់ពាក្យថយក្រោយ (Reverse String)',
-    titleEn: 'Reverse String Algorithm',
-    category: 'algorithms',
-    difficulty: 'ពិបាក',
-    xp: 300,
-    gems: 60,
-    storyKhmer: '🔮 វេទមន្តបកប្រែអក្ខរាថយក្រោយ! ប្រែក្លាយអត្ថបទពីមុខទៅក្រោយ (e.g. "KHMER" -> "REHMK")។',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `reverseString(text)` ដែលទទួល string រួច return string ដែលបានត្រឡប់ពីក្រោយមកមុខវិញ។',
-    theoryKhmer: '💡 **Reverse String Method**\n\nអាចប្រើ `.split("").reverse().join("")` ឬប្រើរង្វិលជុំថយក្រោយ!',
-    keyConcepts: ['string-manipulation', 'algorithm'],
-    starterCode: `function reverseString(text) {
-  // សរសេរកូដត្រឡប់អក្សរថយក្រោយ
-  return "";
-}`,
-    solutionHintKhmer: ' return text.split("").reverse().join("");',
-    solutionCode: `function reverseString(text) {
-  return text.split("").reverse().join("");
-}`,
-    testCases: [
-      {
-        id: 't9-1',
-        inputDescription: 'reverseString("KHMER")',
-        testFnCall: 'reverseString("KHMER")',
-        expectedOutput: 'REHMK',
-      },
-      {
-        id: 't9-2',
-        inputDescription: 'reverseString("កូដ")',
-        testFnCall: 'reverseString("កូដ")',
-        expectedOutput: 'ដូក',
-      },
-    ],
-  },
-  {
-    id: 'quest-10',
-    levelNum: 10,
-    titleKhmer: '👑 បេសកកម្មចុងក្រោយ - មេស្តេចនាគកូដ',
-    titleEn: 'Grand Master Khmer Boss Challenge',
-    category: 'algorithms',
-    difficulty: 'មេបញ្ជាការ (Boss)',
-    xp: 500,
-    gems: 100,
-    storyKhmer: '🐲🐉 ស្តេចនាគកូដបានសួរប្រស្នាចុងក្រោយ! គណនាផលបូកលេខសរុបដែលចែកដាច់នឹង ៣ ឬ ៥ (FizzBuzz Magic Sum) ចាប់ពី ១ ដល់ N-1! ឈ្នះការប្រកួតនេះដើម្បីក្លាយជា មេស្តេចកូដខ្មែរ!',
-    descriptionKhmer: 'សរសេរអនុគមន៍ `bossChallenge(n)`:\nគណនាផលបូកនៃគ្រប់លេខ `i` (ដែល `1 <= i < n`) ណាដែល `i` ចែកដាច់នឹង ៣ ឬ ៥ (`i % 3 === 0 || i % 5 === 0`)។',
-    theoryKhmer: '💡 **ប្រឡងសមត្ថភាពចុងក្រោយ (Boss Fight)**\n\n```js\nlet sum = 0;\nfor (let i = 1; i < n; i++) {\n  if (i % 3 === 0 || i % 5 === 0) {\n    sum += i;\n  }\n}\nreturn sum;\n```',
-    keyConcepts: ['boss-level', 'loops', 'conditionals', 'math'],
-    starterCode: `function bossChallenge(n) {
-  let sum = 0;
-  // សរសេរកូដបូកលេខចែកដាច់នឹង ៣ ឬ ៥ ពី 1 ដល់ n-1
-  return sum;
-}`,
-    solutionHintKhmer: ' ប្រើ for (let i = 1; i < n; i++) { if (i % 3 === 0 || i % 5 === 0) sum += i; }',
-    solutionCode: `function bossChallenge(n) {
-  let sum = 0;
-  for (let i = 1; i < n; i++) {
-    if (i % 3 === 0 || i % 5 === 0) {
-      sum += i;
-    }
-  }
-  return sum;
-}`,
-    testCases: [
-      {
-        id: 't10-1',
-        inputDescription: 'bossChallenge(10)',
-        testFnCall: 'bossChallenge(10)',
-        expectedOutput: '23',
-        explanationKhmer: 'លេខចែកដាច់នឹង ៣ ឬ ៥ ក្រោម ១០ មាន: 3, 5, 6, 9 (បូកបញ្ចូលគ្នា = 23)',
-      },
-      {
-        id: 't10-2',
-        inputDescription: 'bossChallenge(16)',
-        testFnCall: 'bossChallenge(16)',
-        expectedOutput: '60',
-      },
+      { id: 'tlar-1', inputDescription: 'laravelRoute()', testFnCall: 'laravelRoute()', expectedOutput: 'Laravel Khmer Framework Ready' },
     ],
   },
 ];
@@ -479,7 +556,7 @@ export const INITIAL_ACHIEVEMENTS = [
     id: 'ach-boss-slayer',
     titleKhmer: 'អ្នកជ័យជម្នះលើស្តេចនាគ (Boss Slayer)',
     titleEn: 'Boss Slayer',
-    descKhmer: 'ផ្ដួលលំហាត់ Boss កម្រិត ១០',
+    descKhmer: 'ផ្ដួលលំហាត់ Boss',
     icon: '👑',
     requiredXpOrLevel: 10,
     unlocked: false,

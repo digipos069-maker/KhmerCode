@@ -1,6 +1,32 @@
 export type Difficulty = 'ងាយស្រួល' | 'មធ្យម' | 'ពិបាក' | 'មេបញ្ជាការ (Boss)';
 
-export type CategoryId = 'basics' | 'control_flow' | 'functions' | 'arrays' | 'objects' | 'algorithms' | 'ai_generated';
+export type CategoryId = 'basics' | 'control_flow' | 'functions' | 'arrays' | 'objects' | 'algorithms' | 'components' | 'styling' | 'routing' | 'backend' | 'ai_generated';
+
+export type LanguageTrackId =
+  | 'html'
+  | 'css'
+  | 'tailwindcss'
+  | 'javascript'
+  | 'reactjs'
+  | 'vuejs'
+  | 'nuxtjs'
+  | 'nextjs'
+  | 'nodejs'
+  | 'express'
+  | 'nestjs'
+  | 'laravel';
+
+export interface LanguageTrack {
+  id: LanguageTrackId;
+  nameKhmer: string;
+  nameEn: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+  badgeBg: string;
+  descriptionKhmer: string;
+  categoryType: 'frontend' | 'backend' | 'fullstack';
+}
 
 export interface TestCase {
   id: string;
@@ -13,6 +39,7 @@ export interface TestCase {
 
 export interface CodingChallenge {
   id: string;
+  language: LanguageTrackId;
   levelNum: number;
   titleKhmer: string;
   titleEn: string;
