@@ -14,7 +14,10 @@ export type LanguageTrackId =
   | 'nodejs'
   | 'express'
   | 'nestjs'
-  | 'laravel';
+  | 'laravel'
+  | 'postgresql'
+  | 'mysql'
+  | 'oracle';
 
 export interface LanguageTrack {
   id: LanguageTrackId;

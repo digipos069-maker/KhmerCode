@@ -41,13 +41,13 @@ export const TracksPage: React.FC<TracksPageProps> = ({
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
               <Code2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>កាតាលុកជំនាញទាំង ១២ (All 12 Learning Tracks)</span>
+              <span>កាតាលុកជំនាញទាំង ១៥ (All 15 Learning Tracks)</span>
             </div>
             <h1 className="text-2xl md:text-4xl font-extrabold text-white">
               ជ្រើសរើសជំនាញរៀនសរសេរកូដ (Coding Track Catalog)
             </h1>
             <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-              ស្វែងយល់ពីបណ្តុំភាសារៀនកូដ និង Web Frameworks ធំៗទាំង ១២។ ចុចលើជំនាញណាមួយដើម្បីចូលទៅប្រកួតដោះស្រាយលំហាត់ក្នុងផែនទីបេសកកម្ម!
+              ស្វែងយល់ពីបណ្តុំភាសារៀនកូដ, Web Frameworks និង ប្រព័ន្ធទិន្នន័យ Databases (PostgreSQL, MySQL, Oracle) ទាំង ១៥។ ចុចលើជំនាញណាមួយដើម្បីចូលទៅប្រកួតដោះស្រាយលំហាត់ក្នុងផែនទីបេសកកម្ម!
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export const TracksPage: React.FC<TracksPageProps> = ({
                 : 'text-slate-400 hover:text-white'
             }`}
           >
-            ទាំងអស់ (All Tracks - 12)
+            ទាំងអស់ (All Tracks - 15)
           </button>
 
           <button

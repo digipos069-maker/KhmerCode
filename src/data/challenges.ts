@@ -133,6 +133,39 @@ export const ALL_LANGUAGE_TRACKS: LanguageTrack[] = [
     descriptionKhmer: 'PHP Web Framework ដ៏ល្បីល្បាញ Blade Templates, Eloquent ORM & Controllers',
     categoryType: 'backend',
   },
+  {
+    id: 'postgresql',
+    nameKhmer: 'PostgreSQL DB',
+    nameEn: 'PostgreSQL',
+    icon: '🐘',
+    color: 'from-blue-600 to-cyan-600',
+    borderColor: 'border-blue-500',
+    badgeBg: 'bg-blue-600/20 text-blue-300',
+    descriptionKhmer: 'ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យ Advanced Relational Database, SQL Queries, JSONB & Indexes',
+    categoryType: 'backend',
+  },
+  {
+    id: 'mysql',
+    nameKhmer: 'MySQL DB',
+    nameEn: 'MySQL',
+    icon: '🐬',
+    color: 'from-sky-500 to-blue-600',
+    borderColor: 'border-sky-400',
+    badgeBg: 'bg-sky-500/20 text-sky-300',
+    descriptionKhmer: 'ប្រព័ន្ធទិន្នន័យ Relational Database ដ៏ពេញនិយមបំផុតសម្រាប់ Web & Mobile',
+    categoryType: 'backend',
+  },
+  {
+    id: 'oracle',
+    nameKhmer: 'Oracle DB (PL/SQL)',
+    nameEn: 'Oracle Database',
+    icon: '🏛️',
+    color: 'from-red-600 to-rose-700',
+    borderColor: 'border-red-500',
+    badgeBg: 'bg-red-600/20 text-red-300',
+    descriptionKhmer: 'Enterprise Relational Database, PL/SQL Procedures, Triggers & Performance Tuning',
+    categoryType: 'backend',
+  },
 ];
 
 export const KHMER_CODING_CHALLENGES: CodingChallenge[] = [
@@ -484,6 +517,81 @@ export const KHMER_CODING_CHALLENGES: CodingChallenge[] = [
     solutionCode: `function laravelRoute() {\n  return "Laravel Khmer Framework Ready";\n}`,
     testCases: [
       { id: 'tlar-1', inputDescription: 'laravelRoute()', testFnCall: 'laravelRoute()', expectedOutput: 'Laravel Khmer Framework Ready' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 13. POSTGRESQL TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-pg-1',
+    language: 'postgresql',
+    levelNum: 1,
+    titleKhmer: 'PostgreSQL SELECT & WHERE Query',
+    titleEn: 'PostgreSQL Basic SQL Query',
+    category: 'backend',
+    difficulty: 'ងាយស្រួល',
+    xp: 150,
+    gems: 30,
+    storyKhmer: '🐘 អ្នកកំពុងស្វែងរកទិន្នន័យសិស្សក្នុងប្រព័ន្ធទិន្នន័យ PostgreSQL របស់វិទ្យាស្ថានកូដ!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `pgSelectQuery()` ដែលរ៉ីថើន SQL String `"SELECT * FROM students WHERE score >= 80;"`',
+    theoryKhmer: '💡 **PostgreSQL SELECT Query**\n\n```sql\nSELECT * FROM students WHERE score >= 80;\n```',
+    keyConcepts: ['postgresql', 'sql', 'select', 'where'],
+    starterCode: `function pgSelectQuery() {\n  // រ៉ីថើន "SELECT * FROM students WHERE score >= 80;"\n  return "";\n}`,
+    solutionHintKhmer: 'return "SELECT * FROM students WHERE score >= 80;";',
+    solutionCode: `function pgSelectQuery() {\n  return "SELECT * FROM students WHERE score >= 80;";\n}`,
+    testCases: [
+      { id: 'tpg-1', inputDescription: 'pgSelectQuery()', testFnCall: 'pgSelectQuery()', expectedOutput: 'SELECT * FROM students WHERE score >= 80;' },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 14. MYSQL TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-mysql-1',
+    language: 'mysql',
+    levelNum: 1,
+    titleKhmer: 'MySQL INSERT INTO & VALUES Query',
+    titleEn: 'MySQL Data Insertion Query',
+    category: 'backend',
+    difficulty: 'ងាយស្រួល',
+    xp: 150,
+    gems: 30,
+    storyKhmer: '🐬 ចុះឈ្មោះអ្នកប្រើប្រាស់ថ្មីចូលក្នុងតុទិន្នន័យ MySQL users table!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `mysqlInsertQuery()` ដែលរ៉ីថើន SQL String `"INSERT INTO users (name, role) VALUES (\'Sokha\', \'developer\');"`',
+    theoryKhmer: '💡 **MySQL INSERT Query**\n\n```sql\nINSERT INTO users (name, role) VALUES (\'Sokha\', \'developer\');\n```',
+    keyConcepts: ['mysql', 'sql', 'insert', 'values'],
+    starterCode: `function mysqlInsertQuery() {\n  // រ៉ីថើន SQL string\n  return "";\n}`,
+    solutionHintKhmer: 'return "INSERT INTO users (name, role) VALUES (\'Sokha\', \'developer\');";',
+    solutionCode: `function mysqlInsertQuery() {\n  return "INSERT INTO users (name, role) VALUES ('Sokha', 'developer');";\n}`,
+    testCases: [
+      { id: 'tmysql-1', inputDescription: 'mysqlInsertQuery()', testFnCall: 'mysqlInsertQuery()', expectedOutput: "INSERT INTO users (name, role) VALUES ('Sokha', 'developer');" },
+    ],
+  },
+
+  // -------------------------------------------------------------
+  // 15. ORACLE DB TRACK
+  // -------------------------------------------------------------
+  {
+    id: 'quest-oracle-1',
+    language: 'oracle',
+    levelNum: 1,
+    titleKhmer: 'Oracle PL/SQL Stored Procedure',
+    titleEn: 'Oracle PL/SQL Block Statement',
+    category: 'backend',
+    difficulty: 'មធ្យម',
+    xp: 180,
+    gems: 35,
+    storyKhmer: '🏛️ បង្កើត PL/SQL Execution block សម្រាប់គណនាប្រាក់ខែបុគ្គលិកក្នុង Oracle Enterprise Database!',
+    descriptionKhmer: 'សរសេរអនុគមន៍ `oraclePlsqlBlock()` ដែលរ៉ីថើន SQL String `"BEGIN DBMS_OUTPUT.PUT_LINE(\'Oracle Enterprise Ready\'); END;"`',
+    theoryKhmer: '💡 **Oracle PL/SQL Anonymous Block**\n\n```sql\nBEGIN\n  DBMS_OUTPUT.PUT_LINE(\'Oracle Enterprise Ready\');\nEND;\n```',
+    keyConcepts: ['oracle', 'plsql', 'procedure', 'enterprise'],
+    starterCode: `function oraclePlsqlBlock() {\n  // រ៉ីថើន "BEGIN DBMS_OUTPUT.PUT_LINE('Oracle Enterprise Ready'); END;"\n  return "";\n}`,
+    solutionHintKhmer: 'return "BEGIN DBMS_OUTPUT.PUT_LINE(\'Oracle Enterprise Ready\'); END;";',
+    solutionCode: `function oraclePlsqlBlock() {\n  return "BEGIN DBMS_OUTPUT.PUT_LINE('Oracle Enterprise Ready'); END;";\n}`,
+    testCases: [
+      { id: 'toracle-1', inputDescription: 'oraclePlsqlBlock()', testFnCall: 'oraclePlsqlBlock()', expectedOutput: "BEGIN DBMS_OUTPUT.PUT_LINE('Oracle Enterprise Ready'); END;" },
     ],
   },
 ];

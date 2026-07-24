@@ -54,12 +54,12 @@ export const HomePage: React.FC<HomePageProps> = ({
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
             រៀនសរសេរកូដខ្មែរតាមបែប RPG <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
-              ជាមួយ ១២ ភាសា & Frameworks ពេញនិយម
+              ជាមួយ ១៥ ភាសា, Frameworks & Databases
             </span>
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-lg max-w-3xl mx-auto leading-relaxed font-normal">
-            អភិវឌ្ឍជំនាញ Coding របស់អ្នកពីកម្រិតដំបូងរហូតដល់ Senior Developer! រៀន HTML, CSS, Tailwind, JS, React, Vue, Nuxt, Next, Node, Express, NestJS និង Laravel ដោយប្រកួតដោះស្រាយលំហាត់ និងទទួលបាន XP, Gems & Badges!
+            អភិវឌ្ឍជំនាញ Coding & Data របស់អ្នកពីកម្រិតដំបូងរហូតដល់ Senior Developer! រៀន HTML, CSS, JS, React, Vue, Nuxt, Next, Node, Express, Nest, Laravel, PostgreSQL, MySQL និង Oracle DB ដោយប្រកួតដោះស្រាយលំហាត់ និងទទួលបាន XP, Gems & Badges!
           </p>
 
           {/* Action CTAs */}
@@ -83,7 +83,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-sm border border-slate-700 transition transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2"
             >
               <Compass className="w-5 h-5 text-indigo-400" />
-              <span>មើលជំនាញទាំង ១២ (Tracks)</span>
+              <span>មើលជំនាញទាំង ១៥ (Tracks)</span>
             </button>
 
             <button
