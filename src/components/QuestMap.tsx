@@ -11,7 +11,6 @@ import {
   ChevronRight,
   Swords,
   BookOpen,
-  Code2,
 } from 'lucide-react';
 
 interface QuestMapProps {
@@ -49,13 +48,13 @@ export const QuestMap: React.FC<QuestMapProps> = ({
             <div className="space-y-3 text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>រៀនសរសេរកូដគ្រប់ភាសា និង Frameworks</span>
+                <span>ផែនទីបេសកកម្មដោះស្រាយលំហាត់រៀនកូដ (Quest Map)</span>
               </div>
               <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
-                ជ្រើសរើសភាសាកូដដែលអ្នកចង់រៀន (All Coding Tracks)
+                បេសកកម្ម {activeTrack.nameKhmer} ({activeTrack.nameEn})
               </h1>
               <p className="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed">
-                ជ្រើសរើសភាសារៀន ឬ Framework ដែលអ្នកពេញចិត្ត (HTML, CSS, Tailwind, JS, React, Vue, Nuxt, Next, Node, Express, NestJS, Laravel) រួចបន្តបេសកកម្មដោះស្រាយលំហាត់ប្រឡងកូដខ្មែរ!
+                {activeTrack.descriptionKhmer} — ដោះស្រាយលំហាត់កូដតាមកម្រិតដើម្បីទទួលបាន XP, Gems និង Badges!
               </p>
             </div>
 
@@ -72,52 +71,6 @@ export const QuestMap: React.FC<QuestMapProps> = ({
                 <span>បង្កើតលំហាត់ AI {activeTrack.nameKhmer}</span>
               </button>
             </div>
-          </div>
-        </div>
-
-        {/* 12 Language & Framework Selector Hub */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-amber-400" />
-              <span>ជ្រើសរើសភាសារៀនកូដ (Programming Languages & Frameworks)</span>
-            </h2>
-            <span className="text-xs text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
-              ១២ ភាសា & Frameworks ពេញលេញ
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {ALL_LANGUAGE_TRACKS.map((track) => {
-              const isSelected = selectedLanguage === track.id;
-              return (
-                <button
-                  key={track.id}
-                  onClick={() => {
-                    soundFx.playClick();
-                    onSelectLanguage(track.id);
-                  }}
-                  className={`relative p-3.5 rounded-2xl text-left border transition-all duration-200 flex flex-col justify-between ${
-                    isSelected
-                      ? `bg-slate-900 border-amber-400 ring-2 ring-amber-400/40 shadow-lg shadow-amber-500/10 scale-105 z-10`
-                      : `bg-slate-900/60 border-slate-800 hover:bg-slate-800/80 hover:border-slate-700`
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl">{track.icon}</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${track.badgeBg}`}>
-                      {track.categoryType}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className={`text-xs font-bold ${isSelected ? 'text-amber-300' : 'text-slate-200'}`}>
-                      {track.nameKhmer}
-                    </h3>
-                    <p className="text-[10px] text-slate-400 truncate">{track.nameEn}</p>
-                  </div>
-                </button>
-              );
-            })}
           </div>
         </div>
 
