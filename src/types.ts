@@ -112,3 +112,20 @@ export interface AiMessage {
   text: string;
   timestamp: string;
 }
+
+export interface AuthUser {
+  id: string;
+  fullName: string;
+  emailOrPhone: string;
+  avatar: string;
+  role?: string;
+  createdAt: string;
+}
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: AuthUser | null;
+  loading: boolean;
+  error: string | null;
+}
+

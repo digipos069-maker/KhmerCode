@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserStats } from '../types';
+import { useAppSelector } from '../store';
 import { soundFx } from '../utils/sound';
 import {
   Flame,
@@ -16,12 +17,14 @@ import {
   Map,
   Compass,
   Terminal,
+  LogIn,
+  User,
 } from 'lucide-react';
 
 interface NavbarProps {
   stats: UserStats;
-  currentView: 'home' | 'map' | 'tracks' | 'lab';
-  onNavigate: (view: 'home' | 'map' | 'tracks' | 'lab') => void;
+  currentView: 'home' | 'map' | 'tracks' | 'lab' | 'auth';
+  onNavigate: (view: 'home' | 'map' | 'tracks' | 'lab' | 'auth') => void;
   onOpenShop: () => void;
   onOpenAchievements: () => void;
   onOpenLeaderboard: () => void;
@@ -39,6 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenAiGenerator,
   onToggleSound,
 }) => {
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   const xpForNextLevel = stats.level * 100;
   const xpPercentage = Math.min(100, Math.floor((stats.xp / xpForNextLevel) * 100));
 
@@ -115,6 +119,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>ផែនទីលំហាត់</span>
             </button>
 
+            <button
+              onClick={() => {
+                soundFx.playClick();
+                onNavigate('auth');
+              }}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl transition ${
+                currentView === 'auth'
+                  ? 'bg-amber-500 text-slate-950 font-extrabold shadow'
+                  : isAuthenticated
+                  ? 'text-emerald-300 border border-emerald-800/60 bg-emerald-950/40 hover:bg-emerald-900/60'
+                  : 'text-amber-300 border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20'
+              }`}
+            >
+              {isAuthenticated ? (
+                <>
+                  <User className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="truncate max-w-[110px]">{user?.fullName || 'គណនី'}</span>
+                </>
+              ) : (
+                <>
+                  <LogIn className="w-3.5 h-3.5 text-amber-400" />
+                  <span>ចូលប្រើប្រាស់ / ចុះឈ្មោះ</span>
+                </>
+              )}
+            </button>
+
             {currentView === 'lab' && (
               <button
                 onClick={() => {
@@ -129,6 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </nav>
         </div>
+
 
         {/* Player Stats Bar */}
         <div className="flex items-center flex-wrap gap-2 sm:gap-3 bg-slate-800/80 px-3 py-1.5 rounded-2xl border border-slate-700/80">
@@ -290,6 +321,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <Map className="w-3.5 h-3.5" />
           <span>ផែនទី</span>
+        </button>
+
+        <button
+          onClick={() => {
+            soundFx.playClick();
+            onNavigate('auth');
+          }}
+          className={`flex items-center gap-1 px-3 py-1 rounded-lg ${
+            currentView === 'auth' ? 'text-amber-400 font-extrabold' : 'text-slate-400'
+          }`}
+        >
+          <User className="w-3.5 h-3.5" />
+          <span>គណនី</span>
         </button>
 
         {currentView === 'lab' && (

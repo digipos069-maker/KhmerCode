@@ -7,6 +7,8 @@ import { HomePage } from './components/HomePage';
 import { TracksPage } from './components/TracksPage';
 import { QuestMap } from './components/QuestMap';
 import { CodingLab } from './components/CodingLab';
+import { AuthPage } from './components/AuthPage';
+
 import { AiTutorDrawer } from './components/AiTutorDrawer';
 import { AiChallengeModal } from './components/AiChallengeModal';
 import { ShopModal } from './components/ShopModal';
@@ -63,7 +65,8 @@ export default function App() {
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageTrackId>('javascript');
   const [challenges, setChallenges] = useState<CodingChallenge[]>(KHMER_CODING_CHALLENGES);
   const [activeChallenge, setActiveChallenge] = useState<CodingChallenge | null>(null);
-  const [view, setView] = useState<'home' | 'map' | 'tracks' | 'lab'>('home');
+  const [view, setView] = useState<'home' | 'map' | 'tracks' | 'lab' | 'auth'>('home');
+
 
   // Modals
   const [isShopOpen, setIsShopOpen] = useState(false);
@@ -232,7 +235,12 @@ export default function App() {
           />
         )}
 
+        {view === 'auth' && (
+          <AuthPage onSuccessNavigateHome={() => setView('home')} />
+        )}
+
         {view === 'map' && (
+
           <QuestMap
             challenges={challenges}
             stats={stats}
