@@ -142,7 +142,7 @@ export const ALL_LANGUAGE_TRACKS: LanguageTrack[] = [
     borderColor: 'border-blue-500',
     badgeBg: 'bg-blue-600/20 text-blue-300',
     descriptionKhmer: 'ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យ Advanced Relational Database, SQL Queries, JSONB & Indexes',
-    categoryType: 'backend',
+    categoryType: 'database',
   },
   {
     id: 'mysql',
@@ -153,7 +153,7 @@ export const ALL_LANGUAGE_TRACKS: LanguageTrack[] = [
     borderColor: 'border-sky-400',
     badgeBg: 'bg-sky-500/20 text-sky-300',
     descriptionKhmer: 'ប្រព័ន្ធទិន្នន័យ Relational Database ដ៏ពេញនិយមបំផុតសម្រាប់ Web & Mobile',
-    categoryType: 'backend',
+    categoryType: 'database',
   },
   {
     id: 'oracle',
@@ -164,7 +164,7 @@ export const ALL_LANGUAGE_TRACKS: LanguageTrack[] = [
     borderColor: 'border-red-500',
     badgeBg: 'bg-red-600/20 text-red-300',
     descriptionKhmer: 'Enterprise Relational Database, PL/SQL Procedures, Triggers & Performance Tuning',
-    categoryType: 'backend',
+    categoryType: 'database',
   },
 ];
 

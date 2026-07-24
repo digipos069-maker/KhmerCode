@@ -28,7 +28,7 @@ export interface LanguageTrack {
   borderColor: string;
   badgeBg: string;
   descriptionKhmer: string;
-  categoryType: 'frontend' | 'backend' | 'fullstack';
+  categoryType: 'frontend' | 'backend' | 'fullstack' | 'database';
 }
 
 export interface TestCase {

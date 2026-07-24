@@ -63,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              វេទិការៀនសរសេរកូដបែបហ្គេមដំបូងគេបង្អស់ជាភាសាខ្មែរ! បង្កើនជំនាញ JavaScript, Python, React, HTML/CSS ជាមួយ AI Khmer Tutor និងប្រព័ន្ធបេសកកម្មសប្បាយៗ។
+              វេទិការៀនសរសេរកូដបែបហ្គេមដំបូងគេបង្អស់ជាភាសាខ្មែរ! បង្កើនជំនាញ Frontend, Fullstack, Backend, និង Databases (PostgreSQL, MySQL, Oracle) ជាមួយ AI Khmer Tutor និងប្រព័ន្ធបេសកកម្មសប្បាយៗ។
             </p>
 
             <div className="flex items-center gap-2 pt-2">

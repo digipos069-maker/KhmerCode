@@ -27,7 +27,7 @@ export const TracksPage: React.FC<TracksPageProps> = ({
   onSelectTrack,
   onOpenAiGenerator,
 }) => {
-  const [filterCategory, setFilterCategory] = useState<'all' | 'frontend' | 'fullstack' | 'backend'>('all');
+  const [filterCategory, setFilterCategory] = useState<'all' | 'frontend' | 'fullstack' | 'backend' | 'database'>('all');
 
   const filteredTracks = ALL_LANGUAGE_TRACKS.filter((track) => {
     if (filterCategory === 'all') return true;
@@ -91,7 +91,7 @@ export const TracksPage: React.FC<TracksPageProps> = ({
                 : 'text-slate-400 hover:text-white'
             }`}
           >
-            🎨 Frontend Web (HTML, CSS, JS, React, Vue)
+            🎨 Frontend (HTML, CSS, JS, React, Vue)
           </button>
 
           <button
@@ -120,6 +120,20 @@ export const TracksPage: React.FC<TracksPageProps> = ({
             }`}
           >
             🟢 Backend & APIs (Node, Express, Nest, Laravel)
+          </button>
+
+          <button
+            onClick={() => {
+              soundFx.playClick();
+              setFilterCategory('database');
+            }}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+              filterCategory === 'database'
+                ? 'bg-amber-500 text-slate-950 font-extrabold shadow'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            🗄️ Database & SQL (PostgreSQL, MySQL, Oracle)
           </button>
         </div>
 
