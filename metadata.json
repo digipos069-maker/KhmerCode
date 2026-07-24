@@ -1,0 +1,6 @@
+{
+  "name": "KhmerCode Quest - ល្បែងរៀនសរសេរកូដ",
+  "description": "Gamified Khmer programming learning platform with interactive code testing, quests, and AI Khmer coding tutor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
