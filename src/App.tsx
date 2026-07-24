@@ -8,6 +8,7 @@ import { TracksPage } from './components/TracksPage';
 import { QuestMap } from './components/QuestMap';
 import { CodingLab } from './components/CodingLab';
 import { AuthPage } from './components/AuthPage';
+import { Footer } from './components/Footer';
 
 import { AiTutorDrawer } from './components/AiTutorDrawer';
 import { AiChallengeModal } from './components/AiChallengeModal';
@@ -261,6 +262,16 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* Platform Footer */}
+      {view !== 'lab' && (
+        <Footer
+          onNavigate={(v) => setView(v)}
+          onOpenAiGenerator={() => setIsAiGeneratorOpen(true)}
+          onOpenShop={() => setIsShopOpen(true)}
+          onOpenLeaderboard={() => setIsLeaderboardOpen(true)}
+        />
+      )}
 
       {/* Slide-over AI Khmer Tutor Chat */}
       <AiTutorDrawer
