@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserStats, LanguageTrackId, CodingChallenge } from '../types';
 import { ALL_LANGUAGE_TRACKS } from '../data/challenges';
+import { toKhmerNumber } from '../utils/khmer';
 import { soundFx } from '../utils/sound';
 import {
   Sparkles,
@@ -54,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
             រៀនសរសេរកូដខ្មែរតាមបែប RPG <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
-              ជាមួយ ១៥ ភាសា, Frameworks & Databases
+              ជាមួយ {toKhmerNumber(ALL_LANGUAGE_TRACKS.length)} ភាសា, Frameworks & Databases
             </span>
           </h1>
 
@@ -83,7 +84,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-sm border border-slate-700 transition transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2"
             >
               <Compass className="w-5 h-5 text-indigo-400" />
-              <span>មើលជំនាញទាំង ១៥ (Tracks)</span>
+              <span>មើលជំនាញទាំង {toKhmerNumber(ALL_LANGUAGE_TRACKS.length)} (Tracks)</span>
             </button>
 
             <button
@@ -104,12 +105,12 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="bg-slate-900/80 border-b border-slate-800 py-6 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
-            <div className="text-2xl sm:text-3xl font-black text-amber-400">១២ ភាសា</div>
-            <div className="text-xs text-slate-400 font-medium mt-1">Languages & Frameworks</div>
+            <div className="text-2xl sm:text-3xl font-black text-amber-400">{toKhmerNumber(ALL_LANGUAGE_TRACKS.length)} ជំនាញ</div>
+            <div className="text-xs text-slate-400 font-medium mt-1">Languages, Frameworks & DBs</div>
           </div>
 
           <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
-            <div className="text-2xl sm:text-3xl font-black text-cyan-400">១០០+ លំហាត់</div>
+            <div className="text-2xl sm:text-3xl font-black text-cyan-400">{toKhmerNumber(challenges.length)}+ លំហាត់</div>
             <div className="text-xs text-slate-400 font-medium mt-1">Interactive Coding Quests</div>
           </div>
 
@@ -125,7 +126,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* 12 Language & Framework Tracks Showcase */}
+      {/* Language & Framework Tracks Showcase */}
       <section className="py-12 px-4 md:px-8 max-w-6xl mx-auto w-full space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
@@ -134,7 +135,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <span>ជ្រើសរើសជំនាញរៀនកូដ (Coding Tracks)</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              ១២ ផ្លូវរៀនសរសេរកូដ Frontend, Backend & Fullstack
+              {toKhmerNumber(ALL_LANGUAGE_TRACKS.length)} ផ្លូវរៀនសរសេរកូដ Frontend, Backend, Fullstack & Databases
             </h2>
           </div>
 

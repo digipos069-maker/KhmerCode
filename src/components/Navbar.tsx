@@ -1,5 +1,7 @@
 import React from 'react';
 import { UserStats } from '../types';
+import { ALL_LANGUAGE_TRACKS } from '../data/challenges';
+import { toKhmerNumber } from '../utils/khmer';
 import { useAppSelector } from '../store';
 import { soundFx } from '../utils/sound';
 import {
@@ -101,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Compass className="w-3.5 h-3.5" />
-              <span>ជំនាញទាំង ១២</span>
+              <span>ជំនាញ ({ALL_LANGUAGE_TRACKS.length})</span>
             </button>
 
             <button
