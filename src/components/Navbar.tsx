@@ -119,31 +119,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>ផែនទីលំហាត់</span>
             </button>
 
-            <button
-              onClick={() => {
-                soundFx.playClick();
-                onNavigate('auth');
-              }}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl transition ${
-                currentView === 'auth'
-                  ? 'bg-amber-500 text-slate-950 font-extrabold shadow'
-                  : isAuthenticated
-                  ? 'text-emerald-300 border border-emerald-800/60 bg-emerald-950/40 hover:bg-emerald-900/60'
-                  : 'text-amber-300 border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20'
-              }`}
-            >
-              {isAuthenticated ? (
-                <>
-                  <User className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="truncate max-w-[110px]">{user?.fullName || 'គណនី'}</span>
-                </>
-              ) : (
-                <>
-                  <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                  <span>ចូលប្រើប្រាស់ / ចុះឈ្មោះ</span>
-                </>
-              )}
-            </button>
+            {isAuthenticated && (
+              <button
+                onClick={() => {
+                  soundFx.playClick();
+                  onNavigate('auth');
+                }}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl transition ${
+                  currentView === 'auth'
+                    ? 'bg-amber-500 text-slate-950 font-extrabold shadow'
+                    : 'text-emerald-300 border border-emerald-800/60 bg-emerald-950/40 hover:bg-emerald-900/60'
+                }`}
+              >
+                <User className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="truncate max-w-[110px]">{user?.fullName || 'គណនី'}</span>
+              </button>
+            )}
 
             {currentView === 'lab' && (
               <button
@@ -161,125 +152,157 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
 
-        {/* Player Stats Bar */}
-        <div className="flex items-center flex-wrap gap-2 sm:gap-3 bg-slate-800/80 px-3 py-1.5 rounded-2xl border border-slate-700/80">
-          {/* Level & Avatar */}
-          <div className="flex items-center gap-2 pr-2 border-r border-slate-700">
-            <span className="text-2xl" role="img" aria-label="avatar">
-              {stats.avatar}
-            </span>
-            <div>
-              <div className="flex items-center gap-1 text-xs font-semibold text-slate-300">
-                <span className="text-amber-400 font-extrabold">Lv.{stats.level}</span>
-                <span className="text-slate-400 font-normal truncate max-w-[80px]">
-                  {stats.title}
+        {/* Player Stats Bar & Game Actions - Only shown when logged in */}
+        {isAuthenticated ? (
+          <>
+            <div className="flex items-center flex-wrap gap-2 sm:gap-3 bg-slate-800/80 px-3 py-1.5 rounded-2xl border border-slate-700/80">
+              {/* Level & Avatar */}
+              <div className="flex items-center gap-2 pr-2 border-r border-slate-700">
+                <span className="text-2xl" role="img" aria-label="avatar">
+                  {stats.avatar}
+                </span>
+                <div>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-slate-300">
+                    <span className="text-amber-400 font-extrabold">Lv.{stats.level}</span>
+                    <span className="text-slate-400 font-normal truncate max-w-[80px]">
+                      {stats.title}
+                    </span>
+                  </div>
+                  {/* XP Progress bar */}
+                  <div className="w-20 bg-slate-700 h-1.5 rounded-full overflow-hidden mt-0.5 border border-slate-600">
+                    <div
+                      className="bg-gradient-to-r from-amber-500 to-yellow-400 h-full transition-all duration-500"
+                      style={{ width: `${xpPercentage}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Hearts / Lives */}
+              <div
+                title="បេះដូងជីវិត (Hearts)"
+                className="flex items-center gap-1 text-red-400 font-bold text-xs px-2 py-1 rounded-lg bg-red-950/40 border border-red-800/40"
+              >
+                <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500 animate-pulse" />
+                <span>
+                  {stats.hearts}/{stats.maxHearts}
                 </span>
               </div>
-              {/* XP Progress bar */}
-              <div className="w-20 bg-slate-700 h-1.5 rounded-full overflow-hidden mt-0.5 border border-slate-600">
-                <div
-                  className="bg-gradient-to-r from-amber-500 to-yellow-400 h-full transition-all duration-500"
-                  style={{ width: `${xpPercentage}%` }}
-                />
+
+              {/* Gems */}
+              <div
+                title="ត្បូង Gems"
+                className="flex items-center gap-1 text-cyan-300 font-bold text-xs px-2 py-1 rounded-lg bg-cyan-950/40 border border-cyan-800/40"
+              >
+                <Gem className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400/20" />
+                <span>{stats.gems}</span>
+              </div>
+
+              {/* Streak */}
+              <div
+                title="ថ្ងៃរៀនជាប់គ្នា (Streak)"
+                className="flex items-center gap-1 text-orange-400 font-bold text-xs px-2 py-1 rounded-lg bg-orange-950/40 border border-orange-800/40"
+              >
+                <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500/30" />
+                <span>{stats.streakDays} ថ្ងៃ</span>
               </div>
             </div>
+
+            {/* Action Controls & Game Menus */}
+            <div className="flex items-center gap-1.5">
+              {/* AI Generator Button */}
+              <button
+                onClick={() => {
+                  soundFx.playClick();
+                  onOpenAiGenerator();
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white text-xs font-semibold shadow-md shadow-purple-900/40 transition active:scale-95 border border-purple-400/30"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-spin" style={{ animationDuration: '4s' }} />
+                <span className="hidden sm:inline">លំហាត់ AI</span>
+              </button>
+
+              {/* Shop Button */}
+              <button
+                onClick={() => {
+                  soundFx.playClick();
+                  onOpenShop();
+                }}
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition active:scale-95 flex items-center gap-1"
+                title="ហាងលក់ទំនិញ (Shop)"
+              >
+                <ShoppingBag className="w-4 h-4 text-amber-400" />
+              </button>
+
+              {/* Achievements */}
+              <button
+                onClick={() => {
+                  soundFx.playClick();
+                  onOpenAchievements();
+                }}
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition active:scale-95"
+                title="ពានរង្វាន់ (Achievements)"
+              >
+                <Trophy className="w-4 h-4" />
+              </button>
+
+              {/* Leaderboard */}
+              <button
+                onClick={() => {
+                  soundFx.playClick();
+                  onOpenLeaderboard();
+                }}
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-yellow-400 border border-slate-700 transition active:scale-95"
+                title="តារាងចំណាត់ថ្នាក់ (Leaderboard)"
+              >
+                <Crown className="w-4 h-4" />
+              </button>
+
+              {/* Mute/Unmute */}
+              <button
+                onClick={() => {
+                  onToggleSound();
+                }}
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition active:scale-95"
+                title={stats.soundEnabled ? 'បិទសំឡេង' : 'បើកសំឡេង'}
+              >
+                {stats.soundEnabled ? (
+                  <Volume2 className="w-4 h-4 text-emerald-400" />
+                ) : (
+                  <VolumeX className="w-4 h-4 text-slate-500" />
+                )}
+              </button>
+            </div>
+          </>
+        ) : (
+          /* When NOT logged in: show Login/Register CTA and sound toggle cleanly on right */
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                soundFx.playClick();
+                onNavigate('auth');
+              }}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-xs shadow-lg transition active:scale-95"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>ចូលប្រើប្រាស់ / ចុះឈ្មោះ</span>
+            </button>
+
+            <button
+              onClick={() => {
+                onToggleSound();
+              }}
+              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition active:scale-95"
+              title={stats.soundEnabled ? 'បិទសំឡេង' : 'បើកសំឡេង'}
+            >
+              {stats.soundEnabled ? (
+                <Volume2 className="w-4 h-4 text-emerald-400" />
+              ) : (
+                <VolumeX className="w-4 h-4 text-slate-500" />
+              )}
+            </button>
           </div>
-
-          {/* Hearts / Lives */}
-          <div
-            title="បេះដូងជីវិត (Hearts)"
-            className="flex items-center gap-1 text-red-400 font-bold text-xs px-2 py-1 rounded-lg bg-red-950/40 border border-red-800/40"
-          >
-            <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500 animate-pulse" />
-            <span>
-              {stats.hearts}/{stats.maxHearts}
-            </span>
-          </div>
-
-          {/* Gems */}
-          <div
-            title="ត្បូង Gems"
-            className="flex items-center gap-1 text-cyan-300 font-bold text-xs px-2 py-1 rounded-lg bg-cyan-950/40 border border-cyan-800/40"
-          >
-            <Gem className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400/20" />
-            <span>{stats.gems}</span>
-          </div>
-
-          {/* Streak */}
-          <div
-            title="ថ្ងៃរៀនជាប់គ្នា (Streak)"
-            className="flex items-center gap-1 text-orange-400 font-bold text-xs px-2 py-1 rounded-lg bg-orange-950/40 border border-orange-800/40"
-          >
-            <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500/30" />
-            <span>{stats.streakDays} ថ្ងៃ</span>
-          </div>
-        </div>
-
-        {/* Action Controls & Game Menus */}
-        <div className="flex items-center gap-1.5">
-          {/* AI Generator Button */}
-          <button
-            onClick={() => {
-              soundFx.playClick();
-              onOpenAiGenerator();
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white text-xs font-semibold shadow-md shadow-purple-900/40 transition active:scale-95 border border-purple-400/30"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-spin" style={{ animationDuration: '4s' }} />
-            <span className="hidden sm:inline">លំហាត់ AI</span>
-          </button>
-
-          {/* Shop Button */}
-          <button
-            onClick={() => {
-              soundFx.playClick();
-              onOpenShop();
-            }}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition active:scale-95 flex items-center gap-1"
-            title="ហាងលក់ទំនិញ (Shop)"
-          >
-            <ShoppingBag className="w-4 h-4 text-amber-400" />
-          </button>
-
-          {/* Achievements */}
-          <button
-            onClick={() => {
-              soundFx.playClick();
-              onOpenAchievements();
-            }}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition active:scale-95"
-            title="ពានរង្វាន់ (Achievements)"
-          >
-            <Trophy className="w-4 h-4" />
-          </button>
-
-          {/* Leaderboard */}
-          <button
-            onClick={() => {
-              soundFx.playClick();
-              onOpenLeaderboard();
-            }}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-yellow-400 border border-slate-700 transition active:scale-95"
-            title="តារាងចំណាត់ថ្នាក់ (Leaderboard)"
-          >
-            <Crown className="w-4 h-4" />
-          </button>
-
-          {/* Mute/Unmute */}
-          <button
-            onClick={() => {
-              onToggleSound();
-            }}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition active:scale-95"
-            title={stats.soundEnabled ? 'បិទសំឡេង' : 'បើកសំឡេង'}
-          >
-            {stats.soundEnabled ? (
-              <Volume2 className="w-4 h-4 text-emerald-400" />
-            ) : (
-              <VolumeX className="w-4 h-4 text-slate-500" />
-            )}
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Mobile Nav Subbar */}
